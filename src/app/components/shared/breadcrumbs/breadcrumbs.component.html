@@ -1,0 +1,23 @@
+<!-- Subheader Start style="background-image:url(assets/img/login-bg.jpeg)"-->
+<breadcrumb #parent>
+    <div  class="andro_subheader pattern-bg primary-bgs">
+        <div class="container">
+            <div class="andro_subheader-inner">
+                <ng-template ngFor let-route [ngForOf]="parent.breadcrumbs" >
+                    <h1 style="font-size:30px;" >{{ route.displayName }}</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol style="font-size:17px;"  class="breadcrumb">
+                            <li style="font-size:17px;"class="breadcrumb-items"> <a routerLink="/">Home > </a></li>
+                            <li *ngIf="!route.terminal" class="breadcrumb-item">
+                                <a  href="" [routerLink]="[route.url]">{{ route.displayName }}</a>
+                            </li>
+                            <li *ngIf="route.terminal" class="breadcrumb-item active" aria-current="page">{{
+                                route.displayName }}</li>
+                        </ol>
+                    </nav>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</breadcrumb>
+<!-- Subheader End -->

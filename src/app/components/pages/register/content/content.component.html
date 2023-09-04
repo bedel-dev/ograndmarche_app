@@ -1,0 +1,60 @@
+<div class="section">
+    <div class="imgs-wrapper">
+       <!--  <img src="assets/img/products/1.png" alt="veg" class="d-none d-lg-block">
+        <img src="assets/img/products/14.png" alt="veg" class="d-none d-lg-block">-->
+    </div>
+    <div class="container">
+        <div class="andro_auth-wrapper">
+            <div class="andro_auth-description bg-cover bg-center dark-overlay dark-overlay-2" style="background-image: url({{imagurl}}login-bg.jpeg)">
+                <div class="andro_auth-description-inner">
+                  <!--  <i class="flaticon-diet"></i> -->
+                  <h2>Bienvenue !</h2>
+                    <p>Lidar Market Place redefinir l'agriculture.</p>
+                </div>
+            </div>
+            <div class="andro_auth-form">
+                <h2>Inscrivez vous</h2>
+                <form #userSave = "ngForm" (ngSubmit) = "onClickSubmit(userSave.value)">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Nom & prenom" name="name" value="" ngModel>
+                  </div>
+                    <div class="form-group txt">
+                        <input style="padding-right: 125px !important;"
+                        class="form-control"
+                         placeholder="numero de telephone"
+                         name="phone"
+                         value=""
+                         #telInput
+                         (focus)="onFocus()"
+                         (blur)="onBlur()"
+                         (keypress)="onInputKeyPress($event)"
+                         [(ngModel)]="phoneNumber"
+                         (ngModelChange)="onPhoneNumberChange()"
+                          ngModel>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control form-control-light" placeholder="Email" name="email" value="" ngModel>
+                    </div>
+                    <div class="form-group">
+                      <input type="localite" class="form-control form-control-light" placeholder="localite" name="localite" value="" ngModel>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control" placeholder="Mot de passe" name="password" value="" ngModel>
+                  </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Ressaisissez le mot de passe" name="passwordsecond" value="" ngModel>
+                    </div>
+                    <button style="margin-bottom: 10px;"  type="submit" class="andro_btn-custom primary">Inscription</button>
+                 <!--    <div class="andro_auth-seperator">
+                        <span>ou</span>
+                    </div>
+                   <div class="andro_social-login">
+                        <button type="button" class="andro_social-login-btn facebook"><i class="fab fa-facebook-f"></i> Continue with Facebook </button>
+                        <button type="button" class="andro_social-login-btn google"><i class="fab fa-google"></i> Continue with Google</button>
+                    </div>-->
+                    <p>Avez vous deja un compte?  <a routerLink="/login">Connectez vous</a> </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

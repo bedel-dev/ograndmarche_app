@@ -1,0 +1,541 @@
+<!--Cart Start -->
+<div class="section">
+    <div class="container">
+        <!-- Cart Table Start -->
+        <table class="andro_responsive-table">
+            <thead>
+                <tr>
+                    <th class="remove-item"></th>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quanté</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of cart">
+                    <td class="remove">
+                        <button type="button" (click)="removeitem(item.id)" class="close-btn close-danger remove-from-cart">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </td>
+                    <td data-title="Product">
+                        <div class="andro_cart-product-wrapper">
+                            <img src="{{imagurl}}/{{item.img}}"alt="{{item.title}}">
+                            <div class="andro_cart-product-body">
+                                <h6> <a href="#">{{item.title}}</a> </h6>
+                                <p>{{item.qty}} <span *ngIf="item.typeVente ==='Produit consommable'&&item.categorie!=='animal'"> Kilo(s)</span></p>
+                            </div>
+                        </div>
+                    </td>
+                    <td data-title="Price"> <strong>{{item.montantunitaire | number:'1.0-0'}} Fr</strong> </td>
+                    <td class="quantity" data-title="Quantity">
+                        <input type="number" disabled class="qty form-control" value="{{item.qty}}">
+                    </td>
+                    <td data-title="Total"> <strong>{{item.price | number:'1.0-0'}} Fr</strong> </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Cart Table End -->
+        <!-- Coupon Code Start
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="form-group mb-0">
+                    <div class="input-group mb-0">
+                        <input type="text" class="form-control" placeholder="Enter Coupon Code"
+                            aria-label="Coupon Code">
+                        <div class="input-group-append">
+                            <button class="andro_btn-custom shadow-none" type="button">Apply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <!-- Coupon Code End -->
+    </div>
+</div>
+<!-- Cart End -->
+
+
+<div class="section pt-0">
+    <div class="container">
+            <form  #validatedata="ngForm" (ngSubmit)="submit(validatedata.value)" class="col-lg-6s">
+              <div *ngIf ="step==1&&cart.length!==0">
+                  <div class="section-title">
+                    <h4 style="text-transform: uppercase;" class="title">LIVRAISON</h4>
+                </div>
+
+                <div *ngFor="let item of allCoursermontants" >
+                    <div class="radio-item" style="padding-left: 2.25rem">
+                      <input  (change)="checkValueLivraison(item.montant)" class="form-check-input" type="radio" value="Abidjan" name="flexRadioDefault" id="flexRadioDefault1">
+                      <label  style="font-size: 18px!important;margin-left: 5px;" class="form-check-label" for="flexRadioDefault1">
+                         {{item.libelle}}  ({{item.montant| number:'1.0-0'}} Fr)
+                      </label>
+                    </div>
+                    <div>
+                        <div style="font-size: 15px!important;margin-left: 40px; font-weight: 600; padding-bottom:18px;"> Livré entre <span style="color: black;font-weight: bold;" >{{today}}</span>  et <span style="color: black;font-weight: bold;" >{{dateFin}}</span> pour <span [ngStyle]="{'color': (horsAbidjan==true) ? '#50BD4D' : 'gray'}" >{{item.montant| number:'1.0-0'}} Fr</span></div>
+                    </div>
+                </div>
+                
+                <div class="radio-item" style="padding-left: 2.25rem; padding-bottom: 20px;">
+
+                    <div  style="font-size: 18px!important;margin-left: 5px; color:#18181D; font-weight: 600;" class="form-check-label" for="flexRadioDefault2">
+                        Lieu de livraison
+                    </div>                       
+                       <input 
+                       style="border-radius: 6px;border-color: #4b6e904f;"
+                       list="env"
+                        id="country" 
+                        name="country" 
+                        size="50" 
+                        value={{Lieulivraison}}
+                        class="form-control"
+                        placeholder="Entrer le lieu de livraison"
+                        name="country"
+                        ng-model="country"
+                        (input)="onSearchChange($event)"
+                        autocomplete="off" 
+                        />
+                       <div *ngIf="LieuVide" style="color: red;" >Indiquez un lieu de livraison </div>
+                       <div *ngIf="errormodepaie" style="color: red;" >Indiquez un mode de paiement </div>
+
+                       
+                       <datalist id="env">
+                          <option *ngFor="let loc of datalistOptions" >{{loc.description}}</option>
+                        </datalist>
+
+                </div>                
+              </div>
+              <div *ngIf ="cart.length==0">
+                <div class="section-title">
+                  <h4 class="title" style="text-transform: uppercase;" >redefinir l'agriculture</h4>
+              </div>
+
+              <div class="radio-item" style="padding-left: 2.25rem">
+                <div  class="col">
+                  <a href="/home"  style="max-width: 35% !important; 
+                  margin-left: 30%; height:40px;font-size: 16px;margin-top: 57px;" class="andro_btn-custom_local primary btn-block"> <span>COMMENCEZ VOS ACHATS</span></a>
+                </div>
+              </div>
+              <div>
+              </div>
+            </div>
+              <div *ngIf ="step==2&&cart.length!==0">
+                <div class="section-title">
+                  <h4 style="text-transform: uppercase;" class="title">PAIEMENT</h4>
+              </div>
+              <div class="radio-item" style="padding-left: 2.25rem;">
+                <input  checked (change)="TypePaiement('LivraisonPaiement')" class="form-check-input" type="radio" value="food" style="margin-top: 11px;" name="flexRadioDefault" id="flexRadioDefault1">
+
+
+                <div class="col-lg-6">
+                  <label  style="width: 41% !important;font-size: 18px!important;margin-left: -10px;" class="form-check-label" for="flexRadioDefault1">
+                    Payer cash à la livraison 
+                  </label>
+                  <span> <img style="
+                    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
+                    border-radius: 5px 5px 5px 5px;
+                    width: 15%!important;margin-left: 20px;margin-bottom: 6px;" src="assets/img/cc.png" alt=""></span>
+
+                </div>
+
+              </div>
+              <div>
+              <div style="font-size: 15px!important;margin-left: 40px; font-weight: 600; padding-bottom:29px;"> Livré entre <span style="color: black;font-weight: bold;" >{{today}}</span>  et <span style="color: black;font-weight: bold;" >{{dateFin}}</span> pour <span [ngStyle]="{'color': (horsAbidjan==true) ? '#50BD4D' : 'gray'}" >{{transportfrais | number:'1.0-0'}} Fr</span></div>
+              </div>
+
+
+              <div class="radio-item" style="padding-left: 2.25rem">
+                <input style="margin-top: 23px;" [attr.disabled]="true"   (change)="TypePaiement('mobilemoney')" class="form-check-input" type="radio" value="food" name="flexRadioDefault" id="flexRadioDefault1">
+                <div class="col-lg-6">
+                  <label  style="font-size: 18px!important;margin-left: -10px;width: 20% !important;  " class="form-check-label" for="flexRadioDefault1">
+                    Payer via
+                  </label>
+                  <span> <img 
+                    style="max-width: 13%!important; 
+                    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
+                    border-radius: 5px 5px 5px 5px;
+                    margin-right: 34px; margin-bottom: 6px;" src="assets/img/mtn.png" alt=""></span>
+                  <span> <img style="max-width: 13%!important;
+                    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
+                    border-radius: 5px 5px 5px 5px;
+                         margin-right: 34px;margin-bottom: 6px;" src="assets/img/orange.png" alt=""></span>
+                  <span> <img style="max-width: 13%!important; 
+                    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
+                    border-radius: 5px 5px 5px 5px;    
+                    margin-right: 34px;margin-bottom: 6px;" src="assets/img/moov-money" alt=""></span>
+
+                  <span> <img style="max-width: 15%!important; 
+                    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
+                    border-radius: 5px 5px 5px 5px;
+                    margin-bottom: 6px;" src="assets/img/wave.png" alt=""></span>
+                </div>
+              </div>
+              <div>
+                <div style="font-size: 15px!important;margin-left: 40px; font-weight: 600; padding-bottom:24px;"> Livré entre <span style="color: black;font-weight: bold;" >{{today}}</span>  et <span style="color: black;font-weight: bold;" >{{dateFin}}</span> pour <span [ngStyle]="{'color': (horsAbidjan==true) ? '#50BD4D' : 'gray'}" >{{transportfrais | number:'1.0-0'}} Fr</span></div>
+              </div>
+
+
+              <div class="radio-item" style="padding-left: 2.25rem">
+                <input   style="margin-top: 13px;" [attr.disabled]="true"  (change)="TypePaiement('carte')" class="form-check-input" type="radio" value="food" name="flexRadioDefault" id="flexRadioDefault1">
+                <div class="col-lg-6">
+                  <label  style="font-size: 18px!important;margin-left: -10px ; width: 31% !important;" class="form-check-label" for="flexRadioDefault1">
+                    Payer par carte 
+                  </label>
+                  <span> <img style="
+                    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
+                    border-radius: 5px 5px 5px 5px;
+                    max-width: 13%!important;margin-right: 34px;margin-bottom: 6px;" src="assets/img/lidar.png" alt=""></span>
+                  <span> <img style="
+                    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
+                    border-radius: 5px 5px 5px 5px;
+                    max-width: 13%!important;margin-left: 3px;margin-bottom: 6px;" src="assets/img/visa2.png" alt=""></span>
+                </div>
+              </div>
+              <div>
+                <div style="font-size: 15px!important;margin-left: 40px; font-weight: 600; padding-bottom:29px;"> Livré entre <span style="color: black;font-weight: bold;" >{{today}}</span>  et <span style="color: black;font-weight: bold;" >{{dateFin}}</span> pour <span [ngStyle]="{'color': (horsAbidjan==true) ? '#50BD4D' : 'gray'}" >{{transportfrais | number:'1.0-0'}} Fr</span></div>
+              </div>
+
+            </div>
+              <div *ngIf ="step==3&&cart.length!==0&&datalivraison!==null">
+                  <div class="section-title">
+                    <h4 style="text-transform: uppercase;" class="title">BILAN DE LA COMMANDE</h4>
+                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Nombre de produits</th>
+                            <td>{{cart.length}}</td>
+                        </tr>
+                        <tr>
+                            <th>Frais de transport</th>
+                            <td> {{transportfrais | number:'1.0-0'}} Fr </td>
+                        </tr>
+                        <tr>
+                          <th>Montant de la commande</th>
+                          <td> {{calculateprice() | number:'1.0-0'}} Fr</td>
+                        </tr>
+                        <tr>
+                            <th>Lieu de livraison</th>
+                            <td> {{Lieulivraison}}</td>
+                        </tr>
+                        <tr>
+                            <th>Mode de paiement</th>
+                            <td> {{modepaiement}}</td>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <td> <b>{{calculateprice() + transportfrais | number:'1.0-0'}} Fr</b> </td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+
+
+                <div class="container col-lg-6" style="margin-left: 2%!important;">
+                  <div class="row">
+                    <div *ngIf ="step!=1&&cart.length!==0"   style="max-width: 35% !important;" class="col">
+                      <a type="submit"   (click)="retour()" class="andro_btn-custom_local primary btn-block">Retour</a>
+                    </div>
+                    <div   *ngIf ="step!=3&&cart.length!==0" style="max-width: 35% !important;" class="col">
+                      <button type="submit"   class="andro_btn-custom_local primary btn-block">Suivant</button>
+                    </div>
+                  <div  *ngIf ="step ==3&&cart.length!==0" style="max-width: 35% !important;" class="col">
+                    <button type="submit"    class="andro_btn-custom_local primary btn-block">Commander</button>
+                  </div>
+                  </div>
+                </div>
+            </form>
+        </div>
+</div>
+
+<!-- Cart form Start -->
+<div class="section pt-0">
+    <div class="container">
+        <div class="rows andro_cart-forms"  >
+            <div class="col-lg-pp andro_upsells">
+                <div class="section-title flex-title">
+                    <h4 style="text-transform: uppercase;" class="title">Autres produits</h4>
+                    <div class="andro_arrows">
+                        <i class="fa fa-arrow-left slick-arrow slider-prev"></i>
+                        <i class="fa fa-arrow-right slick-arrow slider-next"></i>
+                    </div>
+                </div>
+                <div *ngIf="shopbox.length == 0" class="andro_preloader">
+                    <div class="spinner">
+                        <div class="dot1"></div>
+                        <div class="dot2"></div>
+                    </div>
+                </div>
+                <!-- Upsells Start -->
+                <ngx-slick-carousel #slickModal="slick-carousel" [config]="upsellConfig" class="andro_upsells-slider">
+                    <!-- Product Start -->
+                    <div  ngxSlickItem class="andro_product andro_product-list andro_product-has-controls andro_product-has-buttons" *ngFor="let item of shopbox" >
+                        <div class="andro_product-thumb">
+                            <a routerLink="/product-single-v2/{{item.id}}"><img style="height: 85px;" src="{{imagurl}}/{{item.urlImageVente}}" alt="{{item.description}}"></a>
+                        </div>
+                        <div class="andro_product-body">
+                              <!-- Product Start -->
+                            <!--
+                            <div class="andro_rating-wrapper">
+                                <div class="andro_rating">
+                                    <ngb-rating [max]="5" [(rate)]="item.rating" [readonly]="true">
+                                        <ng-template let-fill="fill" let-index="index">
+                                            <i class="fa fa-star" [class.active]="fill === 100"></i>
+                                        </ng-template>
+                                    </ngb-rating>
+                                </div>
+                                <span>{{item.rating}} Stars</span>
+                            </div>
+                            -->
+                            <h5 class="andro_product-title"> 
+                                <a  
+                                routerLink="/product-single-v2/{{item.id}}"> {{item.description}} </a> 
+                            </h5>
+                            <div class="andro_product-price">
+                                <span *ngIf="item.discount">${{item.prix * (100 - item.discount) / 100 | number:'1.2-2'}}</span>
+                                <span>{{item.prix| number:'1.0-0'}} Fr</span>
+                            </div>
+                            <p>{{item.description}}</p>
+                        </div>
+                        <div class="andro_product-footer">
+                            <div class="andro_product-buttons">
+                                <a routerLink="/product-single-v2/{{item.id}}" class="andro_btn-custom primary">Voir plus</a>
+                                <!-- Product Start
+                                <a href="javascript:void(0)" (click)="open(shopmodal, item)" class="andro_btn-custom light">Quick View</a>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product End -->
+                </ngx-slick-carousel>
+                <!-- Upsells End [(ngModel)]="horsAbidjan"-->
+            </div>
+        <!-- Product End 
+            <form  #validatedata="ngForm" (ngSubmit)="submit(validatedata.value)" class="col-lg-6">
+              <div *ngIf ="step==1&&cart.length!==0">
+                  <div class="section-title">
+                    <h4 style="text-transform: uppercase;" class="title">LIVRAISON</h4>
+                </div>
+                <div class="radio-item" style="padding-left: 2.25rem">
+                  <input  (change)="checkValueLivraison('horsAbidjan')" class="form-check-input" type="radio" value="food" name="flexRadioDefault" id="flexRadioDefault1">
+                  <label  style="font-size: 18px!important;margin-left: 5px;" class="form-check-label" for="flexRadioDefault1">
+                    Livraison hors d'Abidjan   ({{livraisonHorsAbidjan| number:'1.0-0'}} Fr)
+                  </label>
+                </div>
+                <div>
+                    <div style="font-size: 15px!important;margin-left: 40px; font-weight: 600; padding-bottom:18px;"> Livré entre <span style="color: black;font-weight: bold;" >{{today}}</span>  et <span style="color: black;font-weight: bold;" >{{dateFin}}</span> pour <span [ngStyle]="{'color': (horsAbidjan==true) ? '#50BD4D' : 'gray'}" >{{livraisonHorsAbidjan| number:'1.0-0'}} Fr</span></div>
+                </div>
+                
+
+                <div class="form-check" style="padding-left: 2.25rem !important; ">
+                  <input   (change)="checkValueLivraison('Abidjan')" class="form-check-input" type="radio" value="foods" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                  <label style="font-size: 18px!important;margin-left: 5px;" class="form-check-label" for="flexRadioDefault2">
+                    Livraison à Abidjan ({{livraisonAbidjan| number:'1.0-0'}} Fr)
+                  </label>
+                </div>
+                <div style="font-size: 15px!important;margin-left: 40px; font-weight: 600; padding-bottom:9px;"> Livré entre <span style="color: black;font-weight: bold;" >{{today}}</span> et <span style="color: black;font-weight: bold;" >{{dateFin}}</span>  pour <span [ngStyle]="{'color': (Abidjan==true) ? '#50BD4D' : 'gray'}">{{livraisonAbidjan| number:'1.0-0'}} Fr</span> </div>
+                
+                
+                <div class="radio-item" style="padding-left: 2.25rem; padding-bottom: 20px;">
+
+                    <label style="font-size: 18px!important;margin-left: 5px;" class="form-check-label" for="flexRadioDefault2">
+                        Lieu de livraison
+                    </label>                       
+                       <input 
+                       style="border-radius: 6px;border-color: black;"
+                       list="countrydata"
+                        id="country" 
+                        name="country" 
+                        size="50" 
+                        placeholder="Entrer le lieu de livraison"
+                        name="country"
+                        ng-model="country"
+                        (input)="onSearchChange($event)"
+                        autocomplete="off" 
+                        />
+                       <div *ngIf="LieuVide" style="color: red;" >Indiquez un lieu de livraison </div>
+                        <datalist id="countrydata">
+                          <option *ngFor="let loc of datalistOptions" >{{loc.description}}</option>
+                        </datalist>
+
+                </div>                
+              </div>
+              <div *ngIf ="cart.length==0">
+                <div class="section-title">
+                  <h4 class="title" style="text-transform: uppercase;" >redefinir l'agriculture</h4>
+              </div>
+
+              <div class="radio-item" style="padding-left: 2.25rem">
+                <div  class="col">
+                  <a href="/home" style="height:40px;font-size: 16px;margin-top: 57px;" class="andro_btn-custom_local primary btn-block"> <span>COMMENCEZ VOS ACHATS</span></a>
+                </div>
+              </div>
+              <div>
+              </div>
+            </div>
+              <div *ngIf ="step==2&&cart.length!==0">
+                <div class="section-title">
+                  <h4 style="text-transform: uppercase;" class="title">PAIEMENT</h4>
+              </div>
+              <div class="radio-item" style="padding-left: 2.25rem">
+                <input  checked (change)="TypePaiement('LivraisonPaiement')" class="form-check-input" type="radio" value="food" name="flexRadioDefault" id="flexRadioDefault1">
+                <label  style="font-size: 18px!important;margin-left: 5px;" class="form-check-label" for="flexRadioDefault1">
+                  Payer cash à la livraison <span> <img style="max-width: 15%!important;margin-left: 3px;margin-bottom: 6px;" src="assets/img/cashIcon1_1.png" alt=""></span>
+                </label>
+              </div>
+              <div>
+              <div style="font-size: 15px!important;margin-left: 40px; font-weight: 600; padding-bottom:18px;"> Livré entre <span style="color: black;font-weight: bold;" >{{today}}</span>  et <span style="color: black;font-weight: bold;" >{{dateFin}}</span> pour <span [ngStyle]="{'color': (horsAbidjan==true) ? '#50BD4D' : 'gray'}" >{{transportfrais | number:'1.0-0'}} Fr</span></div>
+              </div>
+
+
+              <div class="radio-item" style="padding-left: 2.25rem">
+                <input  checked (change)="TypePaiement('LivraisonPaiement')" class="form-check-input" type="radio" value="food" name="flexRadioDefault" id="flexRadioDefault1">
+                <label  style="font-size: 18px!important;margin-left: 5px;" class="form-check-label" for="flexRadioDefault1">
+                  MTN Monney <span> <img style="max-width: 15%!important;margin-left: 3px;margin-bottom: 6px;" src="assets/img/mtn.jpeg" alt=""></span>
+                </label>
+              </div>
+              <div>
+              <div style="font-size: 15px!important;margin-left: 40px; font-weight: 600; padding-bottom:18px;"> Livré entre <span style="color: black;font-weight: bold;" >{{today}}</span>  et <span style="color: black;font-weight: bold;" >{{dateFin}}</span> pour <span [ngStyle]="{'color': (horsAbidjan==true) ? '#50BD4D' : 'gray'}" >{{transportfrais | number:'1.0-0'}} Fr</span></div>
+              </div>
+
+            </div>
+              <div *ngIf ="step==3&&cart.length!==0&&datalivraison!==null">
+                  <div class="section-title">
+                    <h4 style="text-transform: uppercase;" class="title">BILAN DE LA COMMANDE</h4>
+                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Nombre de produits</th>
+                            <td>{{cart.length}}</td>
+                        </tr>
+                        <tr>
+                            <th>Frais de transport</th>
+                            <td> {{transportfrais | number:'1.0-0'}} Fr </td>
+                        </tr>
+                        <tr>
+                            <th>Lieu de livraison</th>
+                            <td> {{Lieulivraison}}</td>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <td> <b>{{calculateprice() + transportfrais | number:'1.0-0'}} Fr</b> </td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+
+
+                <div class="container">
+
+                  <div class="row">
+                    <div *ngIf ="step!=1&&cart.length!==0" class="col">
+
+                      <a type="submit"  (click)="retour()" class="andro_btn-custom_local primary btn-block">Retour</a>
+
+
+                    </div>
+
+
+                    <div   *ngIf ="step!=3&&cart.length!==0" class="col">
+
+                      <button type="submit"   class="andro_btn-custom_local primary btn-block">Suivant</button>
+
+
+                    </div>
+
+
+
+                  <div  *ngIf ="step ==3&&cart.length!==0" class="col">
+
+                    <button type="submit"   class="andro_btn-custom_local primary btn-block">Commander</button>
+
+                  </div>
+
+                  </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>-->
+<!-- Cart form End -->
+<ng-template #shopmodal let-modal>
+    <div class="modal-body">
+        <div class="close-btn close-dark close" (click)="modal.dismiss('Cross click')">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="andro_product">
+                        <div class="andro_product-badge andro_badge-featured" *ngIf="modalContent.featured">
+                            <i class="fa fa-star"></i>
+                            <span>Featured</span>
+                        </div>
+                        <div class="andro_product-badge andro_badge-sale" *ngIf="modalContent.discount">
+                            {{modalContent.discount}}% Off
+                        </div>
+                        <img [src]="modalContent.img" alt="{{modalContent.title}}">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="andro_product-single-content">
+                        <div class="andro_rating-wrapper">
+                            <div class="andro_rating">
+                                <ngb-rating [max]="5" [(rate)]="modalContent.rating" [readonly]="true">
+                                    <ng-template let-fill="fill" let-index="index">
+                                        <i class="fa fa-star" [class.active]="fill === 100"></i>
+                                    </ng-template>
+                                </ngb-rating>
+                            </div>
+                            <span>{{modalContent.rating}} Stars</span>
+                        </div>
+                        <h3> {{modalContent.title}} </h3>
+                        <div class="andro_product-price">
+                            <span *ngIf="modalContent.discount">${{modalContent.price * (100 - modalContent.discount) /
+                                100 |
+                                number:'1.2-2'}}</span>
+                            <span>${{modalContent.price| number:'1.2-2'}}</span>
+                        </div>
+                        <p class="andro_product-excerpt">{{modalContent.shortdesc}}</p>
+                        <form class="andro_product-atc-form">
+                            <div class="andro_product-variation-wrapper">
+                                <div class="form-group">
+                                    <select class="form-control" name="amount">
+                                        <option value="">Select Amount</option>
+                                        <option value="1">1 Kilo</option>
+                                        <option value="2">2 Kilos</option>
+                                        <option value="3">3 Kilos</option>
+                                        <option value="4">4 Kilos</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" name="breed">
+                                        <option value="">Select a Breed</option>
+                                        <option value="italian">Italian</option>
+                                        <option value="egyptian">Egyptian</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="qty-outter">
+                                <a routerLink="/product-single-v2/{{modalContent.id}}" (click)="modal.dismiss('Cross click')" class="andro_btn-custom">Buy Now</a>
+                                <div class="qty">
+                                    <span class="qty-subtract" (click)="decrement()">
+                                        <i class="fa fa-minus"></i>
+                                    </span>
+                                    <input type="text" name="qty" value="{{counter}}">
+                                    <span class="qty-add" (click)="increment()">
+                                        <i class="fa fa-plus"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

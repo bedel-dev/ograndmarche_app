@@ -1,0 +1,113 @@
+<!-- Blog Posts Start -->
+<div class="section">
+    <div class="container">
+        <!-- 
+                <ng-masonry-grid [masonryOptions]="{ transitionDuration: '0.8s', percentPosition: true }" [useAnimation]="true"
+            [useImagesLoaded]="true" class="rows masonrys">
+      
+                 <article class="andro_post">
+                    <div class="andro_post-thumb">
+                        <a routerLink="/post-single/{{item.id}}">
+                            <img src="{{item.masonryphoto}}" alt="{{item.title}}">
+                        </a>
+                    </div>
+                    <div class="andro_post-body">
+                        <div class="andro_post-categories">
+                            <a href="#" *ngFor="let tags of getBlogTags(item.tags)">{{tags.title}}</a>
+                        </div>
+                        <div class="andro_post-desc">
+                            <h5> <a routerLink="/post-single/{{item.id}}">{{item.title}}</a> </h5>
+                            <span> <span class="fw-600">Posted On </span> <a routerLink="/post-single/{{item.id}}"
+                                    class="andro_post-date">{{item.postdate}}</a> </span>
+                            <p>{{item.shortdesc}}</p>
+                        </div>
+                        <a class="andro_btn-custom btn-block" routerLink="/post-single/{{item.id}}"> Read More
+                        </a>
+                    </div>
+                </article>
+
+                <ng-masonry-grid-item   style="width: 100%; position: inherit !important; top: 10%!important;" class="masonry-item">
+       
+                </ng-masonry-grid-item>
+            </ng-masonry-grid>
+        -->
+        <div>
+            <hr>    
+            <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="orderIdFilter">Sélectionnez  une culture</label>
+                                <select   style="border: 2px solid #c7d1d6;" id="orderIdFilter"    (change)="FilterTable($event,'culture')" type="text" class="form-control order-search-box ng-pristine ng-untouched ng-valid ng-empty" placeholder="Sélectionnez  une culture" ng-model="code" filter-by="code" filter-type="text">
+                                    <option  disabled value="null">Sélectionnez  une culture</option>
+                                    <option  *ngFor="let item of  cultureliste" value={{item}}> {{item}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="orderIdFilter">Sélectionnez  une ville </label>
+                            <select style="border: 2px solid #c7d1d6;"  (change)="FilterTable($event,'ville')" id="orderIdFilter" type="text" class="form-control order-search-box ng-pristine ng-untouched ng-valid ng-empty" placeholder="Sélectionnez  une ville" ng-model="code" filter-by="code" filter-type="text">
+                                <option  disabled value="null">Sélectionnez  une ville</option>
+                                <option  *ngFor="let item of  villeliste" value={{item}}> {{item}}</option>
+
+                            </select>                            
+                        </div>
+                    </div>
+            </div>
+            <hr>    
+
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>
+                                Culture
+                            </th>
+                            <th>
+                                Catégorie
+                            </th>
+                            <th>
+                            Type de produit
+                            </th>
+                            <th >
+                                Prix en  gros
+                            </th>
+                            <th>
+                                Prix en  detail
+                            </th>
+                            <th>
+                                Ville
+                            </th>
+                            <th>
+                                Region
+                            </th>
+                            <th >
+                                Unité
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of ListProduits | paginate: { itemsPerPage: 5, currentPage: page,totalItems:count}; let i=index">
+                            <td> {{item.libelle}} </td>
+                            <td> {{item.categorieprod}}</td>
+                            <td> {{item.typeprod}}</td>
+                            <td>{{item.prixgros}} FCFA</td>
+                            <td> {{item.prixdetail}} FCFA</td>
+                            <td> {{item.ville}}</td>
+                            <td>{{item.region}}</td>
+                            <td> {{item.unite}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+              <div class="d-flex justify-content-between p-2">
+                <div>
+                    <pagination-controls previousLabel="Prev" nextLabel="Next"(pageChange)="onTableDataChange($event)" ></pagination-controls>
+                  </div>
+              </div> 
+        </div>
+    </div>
+</div>
+<!-- Blog Posts End -->

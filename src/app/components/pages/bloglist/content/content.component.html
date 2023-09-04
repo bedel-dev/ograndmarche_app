@@ -1,0 +1,201 @@
+<!-- Blog Posts Start
+<div class="section">
+  <div class="container">
+    <article class="andro_post andro_post-list"
+      *ngFor="let item of blogbox | paginate: { itemsPerPage: 3, currentPage: page }">
+      <div class="andro_post-thumb">
+        <a routerLink="/post-single/{{item.id}}">
+          <img src="{{item.photo}}" alt="{{item.title}}">
+        </a>
+      </div>
+      <div class="andro_post-body">
+        <div class="andro_post-categories">
+          <a href="#" *ngFor="let tags of getBlogTags(item.tags)">{{tags.title}}</a>
+        </div>
+        <div class="andro_post-desc">
+          <h5> <a routerLink="/post-single/{{item.id}}">{{item.title}}</a> </h5>
+          <span> <span class="fw-600">Posted On </span> <a routerLink="/post-single/{{item.id}}"
+              class="andro_post-date">{{item.postdate}}</a> </span>
+          <p>{{item.shortdesc}}</p>
+        </div>
+        <a class="andro_btn-custom" routerLink="/post-single/{{item.id}}"> Read More </a>
+      </div>
+    </article>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>-->
+<!-- Blog Posts End card mb-4-->
+
+<div *ngIf="User.length == 0" class="andro_preloader">
+  <div class="spinner">
+      <div class="dot1"></div>
+      <div class="dot2"></div>
+  </div>
+</div>
+<section  style="background-color: #eee;">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="{{imagurl}}avatar.png" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3">{{User.name}}</h5>
+            <p class="text-muted mb-1">{{User.role}}</p>
+            <p class="text-muted mb-4">Membre depuis : {{User.created_at}}</p>
+            <div class="d-flex justify-content-center mb-2">
+              <button type="button" (click)="onButtonClick()"  class="btn btn-outline-primary ms-1">Modifier</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!display&&!forgotpass&&!changePass" class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Nom & Prenom</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{User.name}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{User.email}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Numero</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{User.contact}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Adresse</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{User.locality}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Role</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{User.role}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="display" class="col-lg-8">
+        <form  #userlogin = "ngForm" (ngSubmit) = "onClickSubmit(userlogin.value)"class="card mb-4">
+          <div class="card-body">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Nom & prenom" name="name" value="" [(ngModel)]="name">
+          </div>
+            <div class="form-group txt">
+              <div class="form-group txt">
+                <input style="padding-right: 125px !important;"
+                 class="form-control"
+                 placeholder="numero de telephone"
+                 name="phone"
+                 value=""
+                 #telInput
+                 (focus)="onFocus()"
+                 (blur)="onBlur()"
+                 (keypress)="onInputKeyPress($event)"
+                 [(ngModel)]="phoneNumber"
+                 (ngModelChange)="onPhoneNumberChange()"
+                  ngModel>
+            </div>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control form-control-light" placeholder="Email" name="email" value=""  [(ngModel)]="email">
+            </div>
+            <div class="form-group">
+              <input type="localite" class="form-control form-control-light" placeholder="localite" name="localite" value="" [(ngModel)]="localite">
+            </div>
+            <button style="margin-bottom: 10px;"  type="submit" class="andro_btn-custom primary">Modifier</button>
+            <p>Réinitialiser votre mot de passe ?  <a type="submit" style="color: #50BD4D;font-weight: 700;" (click)="Reset()">Réinitialiser</a> </p>
+
+          </div>
+        </form>
+      </div>
+
+        <div class="col-lg-8 card mb-4" *ngIf="forgotpass&&verificateCompte" >
+          <h2>Confirmation</h2>
+          <form #codevalidate = "ngForm" (ngSubmit) = "validatecode(codevalidate.value)">
+              <div class="form-group">
+                <div class="form-group ">
+                  <input style="padding-right: 125px !important;"
+                  class="form-control"
+                   placeholder="Entrez le code de confirmation"
+                   name="code" ngModel>
+              </div>
+                  </div>
+              <button style="margin-bottom: 10px;" type="submit" class="andro_btn-custom primary">Valider</button>
+
+          </form>
+       </div>
+       <div *ngIf="changePass" class="col-lg-8 card mb-4">
+        <h2>Changer votre Mote de passe</h2>
+        <form #userupdate = "ngForm" (ngSubmit) = "onClickSaveUpdateUser(userupdate.value)">
+            <div class="form-group">
+              <div class="form-group ">
+                <input style="padding-right: 125px !important;"
+                class="form-control"
+                 placeholder="Entrez un mot de passe"
+                 name="pass1" ngModel>
+            </div>
+            <div class="form-group ">
+               <input style="padding-right: 125px !important;"
+               class="form-control"
+                placeholder="Confirmé le mot de passe"
+                name="pass2" ngModel>
+          </div>
+                </div>
+            <div class="form-group">
+                <p style="font-size:18px; font-weight:700;" >
+                  Entrez le code de validation.
+                </p>
+            </div>
+            <button style="margin-bottom: 10px;" type="submit" class="andro_btn-custom primary">Continuer</button>
+        </form>
+    </div>
+      <div *ngIf="forgotpass&&!verificateCompte&&!display" class="col-lg-8 card mb-4">
+        <h2>Verification de compte</h2>
+        <div>
+          <form #userforgetlogin = "ngForm" (ngSubmit) = "onClickValidateCompte(userforgetlogin.value)" >
+            <div class="form-group">
+              <div class="form-group txt">
+                <input style="padding-right: 125px !important;"
+                class="form-control"
+                 placeholder="Entrez votre Email"
+                 name="email" ngModel>
+            </div>
+            </div>
+            <div class="form-group">
+                <p style="font-size:18px; font-weight:700;" >
+                  Vous recevrez un code de validation.
+                </p>
+            </div>
+            <button style="margin-bottom: 10px;" type="submit" class="andro_btn-custom primary">Continuer</button>
+
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

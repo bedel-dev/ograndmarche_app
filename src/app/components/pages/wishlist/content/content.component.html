@@ -1,0 +1,51 @@
+<!-- Wishlist Start -->
+<div class="section">
+    <div class="container">
+        <!-- Wishlist Table Start -->
+        <table class="andro_responsive-table">
+            <thead>
+                <tr>
+                    <th>Produit (s)</th>
+                    <th>Montant</th>
+                </tr>
+            </thead>
+            <div *ngIf="Product.length == 0" class="andro_preloader">
+                <div class="spinner">
+                    <div class="dot1"></div>
+                    <div class="dot2"></div>
+                </div>
+            </div>
+            <tbody>
+                <tr *ngFor="let item of Product">
+                    <td data-title="Product">
+                        <div class="andro_cart-product-wrapper">
+                            <div class="andro_cart-product-body">
+                                <h6> <a  style="font-weight:700;" >{{item.titre}} </a> </h6>
+                                <p *ngIf="item.typeVente =='Produit consommable'" style="font-weight:700;">{{item.quantite}} Kilo (s)</p>
+                                <p *ngIf="item.categorie =='animal'" style="font-weight:700;">{{item.quantite}}</p>
+                                <p *ngIf="item.typeVente =='Intrant'" style="font-weight:700;">{{item.quantite}}</p>
+                                <p *ngIf="item.typeVente =='Outils'" style="font-weight:700;">{{item.quantite}}</p>
+
+                            </div>
+                        </div>
+                    </td>
+                    <td style="font-weight:700;">{{item.prixunitaire}} Fr</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Wishlist Table End -->
+        <!-- Share Wishlist Start
+        <div class="text-center">
+            <h5>Share Your Wishlist</h5>
+            <div class="andro_post-share">
+                <ul class="andro_sm justify-content-center">
+                    <li> <a href="#" ngbTooltip="Share on Facebook"> <i class="fab fa-facebook-f"></i> </a> </li>
+                    <li> <a href="#" ngbTooltip="Share on Twitter"> <i class="fab fa-twitter"></i> </a> </li>
+                    <li> <a href="#" ngbTooltip="Share on Linkedin"> <i class="fab fa-linkedin-in"></i> </a> </li>
+                </ul>
+            </div>
+        </div> -->
+        <!-- Share Wishlist End -->
+    </div>
+</div>
+<!--  Wishlist End -->

@@ -1,0 +1,182 @@
+<!-- Products Start -->
+<div class="section">
+    <div class="container">
+        <!-- Product Count & Orderby Start
+        <div class="andro_shop-global">
+            <p>Showing <b>6</b> of <b>{{shopbox.length}}</b> products </p>
+            <form method="post">
+                <select class="form-control" name="orderby">
+                    <option value="default">Default sorting</option>
+                    <option value="latest">Latest release</option>
+                    <option value="price-down">Price: High - Low</option>
+                    <option value="price-up">Price: Low - High</option>
+                    <option value="popularity">Popularity Sorting</option>
+                </select>
+            </form>
+        </div> -->
+
+        <!-- Product Count & Orderby End -->
+        <div class="row">
+            <!-- Product Start 
+            <div *ngIf="isLaoder" class="andro_preloader">
+                <div class="spinner">
+                    <div class="dot1"></div>
+                    <div class="dot2"></div>
+                </div>
+            </div>-->
+            <div  *ngIf="vide" style="position:relative;padding: 11% 37%;" >
+
+                <h2    
+                style="font-weight: 500; 
+                padding-bottom: 8px;
+                padding-top: 8px;
+                font-size: 40px;"
+                 >Aucun produit</h2>
+            </div>
+            <div *ngIf="spinner" style="padding: 0% 33% 0% 38%;" >
+                <div class="spinner-grow text-muted"></div>
+                        <div class="spinner-grow text-primary"></div>
+                        <div class="spinner-grow text-success"></div>
+                        <div class="spinner-grow text-info"></div>
+                        <div class="spinner-grow text-warning"></div>
+                        <div class="spinner-grow text-danger"></div>
+                        <div class="spinner-grow text-secondary"></div>
+                        <div class="spinner-grow text-dark"></div>
+            </div>
+            <div class="col-md-4 col-sm-6" *ngFor="let item of allproduct | paginate: { itemsPerPage: 6, currentPage: page }">
+                <div *ngIf="!isLaoder" class="andro_product andro_product-has-controls">
+                  <!--
+                    <div class="andro_product-badge andro_badge-featured" *ngIf="item.featured">
+                        <i class="fa fa-star"></i>
+                        <span>Featured</span>
+                    </div>
+                    <div class="andro_product-badge andro_badge-sale" *ngIf="item.discount">
+                        {{item.discount}}% Off
+                    </div>-->
+                    <div class="andro_product-thumb">
+                        <a routerLink="/product-single-v2/{{item.id}}"><img style="height: 170px;" src="{{imagurl}}/{{item.urlImageVentePrincipal}}"
+                            alt="{{item.description}}"></a> 
+                    </div>
+                    <div class="andro_product-body">
+                        <h5 class="andro_product-title"> <a routerLink="/product-single-v2/{{item.id}}">
+                            {{item.label}} </a></h5>
+                        <div class="andro_product-price">
+                            <span *ngIf="item.discount">{{item.price * (100 - item.discount) / 100 |
+                                number:'1.2-2'}}</span>
+                            <span>{{item.prix| number:'1.0-0'}} Fr 
+                            <span *ngIf="item.typeVente=='Produit consommable'&&item.categorie!=='animal'">/ Kg</span> </span>
+                            <span style="text-decoration: auto !important;padding-left: 50px;" >Disponible : {{item.quantite}} </span>
+
+                        </div>
+                        
+                         <!--   <p>{{item.shortdesc}}</p>
+
+                        <div class="andro_rating-wrapper">
+                            <div class="andro_rating">
+                                <ngb-rating [max]="5" [(rate)]="item.rating" [readonly]="true">
+                                    <ng-template let-fill="fill" let-index="index">
+                                        <i class="fa fa-star" [class.active]="fill === 100"></i>
+                                    </ng-template>
+                                </ngb-rating>
+                            </div>
+                            <span>{{item.rating}} Stars</span>
+                        </div>-->
+                     <!-- -->
+                    </div>
+                    <div class="andro_product-footer">
+                        <div class="andro_product-controls">
+                            <a routerLink="/product-single-v2/{{item.id}}"> <i ngbTooltip="Voir plus" placement="top" class="flaticon-view" ></i></a>
+                            <a href="javascript:void(0)" (click)="open(shopmodal, item)"> <i ngbTooltip="Ajouter au panier" placement="top" class="fas fa-shopping-cart" ></i></a>
+                           <!--  <a href="#"> <i ngbTooltip="Compare" placement="top" class="flaticon-compare"></i></a>
+                            <a href="#" class="favorite"> <i ngbTooltip="Add To Wishlist" placement="top" class="flaticon-like"></i></a>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product End -->
+        </div>
+        <!-- Pagination Start -->
+        <pagination-controls *ngIf="allproduct.length !== 0" (pageChange)="page = $event"></pagination-controls>
+        <!-- Pagination End -->
+    </div>
+</div>
+<!-- Products End -->
+<ng-template #shopmodal let-modal>
+  <div class="modal-body">
+      <div class="close-btn close-dark close" (click)="modal.dismiss('Cross click')">
+          <span></span>
+          <span></span>
+      </div>
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-5">
+                  <div class="andro_product">
+                      <div class="andro_product-badge andro_badge-featured" *ngIf="modalContent.featured">
+                          <i class="fa fa-star"></i>
+                          <span>Featured</span>
+                      </div>
+                      <div class="andro_product-badge andro_badge-sale" *ngIf="modalContent.discount">
+                          {{modalContent.title}}% Off
+                      </div>
+                      <img src="{{imagurl}}/{{modalContent.urlImageVente}}"  alt="{{modalContent.title}}">
+                  </div>
+              </div>
+              <div class="col-md-7">
+                  <div class="andro_product-single-content">
+                      <!--
+                      <div class="andro_rating-wrapper">
+                          <div class="andro_rating">
+                              <ngb-rating [max]="5" [(rate)]="modalContent.rating" [readonly]="true">
+                                  <ng-template let-fill="fill" let-index="index">
+                                      <i class="fa fa-star" [class.active]="fill === 100"></i>
+                                  </ng-template>
+                              </ngb-rating>
+                          </div>
+                          <span>{{modalContent.rating}} Stars</span>
+                      </div>
+                      -->
+                      <h3> {{modalContent.title}} </h3>
+                      <div class="andro_product-price">
+                          <span *ngIf="modalContent.discount">${{modalContent.prix * (100 - modalContent.discount) /
+                              100 |
+                              number:'1.2-2'}}</span>
+                          <span>{{modalContent.prix| number:'1.2-2'}} Fr <span *ngIf="modalContent.typeVente ==='Produit consommable'&&modalContent.categorie!=='animal'">/ Kg</span></span>
+                      </div>
+                      <p style="font-size: 30px !important;" class="andro_product-excerpt">{{modalContent.description}}</p>
+
+                      <form (submit)="addtopanier(modalContent.quantite,modalContent.description, modalContent.id ,modalContent.urlImageVente,modalContent.prix,modalContent.idUser,modalContent.typeVente,modalContent.categorie)"  class="andro_product-atc-form">
+                          <div class="andro_product-variation-wrapper">
+                              <div class="form-group">
+                                  <div  class="form-control" name="amount">
+                                      <a>{{modalContent.quantite}} <span *ngIf="modalContent.typeVente=='Produit consommable'&&modalContent.categorie!=='animal'"> Kilo (s) </span> disponible (s)</a>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                <div *ngIf="montantcommande ===1"  class="form-control" name="amount">
+                                    <a value="">Montant total : {{modalContent.prix| number:'1.0-0'}} Fr</a>
+                                </div>
+                                <div *ngIf="montantcommande >1"  class="form-control" name="amount">
+                                  <a value="">Montant total :  {{montantcommande| number:'1.0-0'}} Fr</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="qty-outter">
+                              <button type="submit" class="andro_btn-custom">Ajouter au panier</button>
+                              <div class="qty">
+                                  <span class="qty-subtract" (click)="decrement(modalContent.quantite,modalContent.prix)">
+                                      <i class="fa fa-minus"></i>
+                                  </span>
+                                 <input type="text" [(ngModel)]="counter" id="counter" name="counter" value="{{counter}}">
+                                  <span class="qty-add" (click)="increment(modalContent.quantite,modalContent.prix)">
+                                      <i class="fa fa-plus"></i>
+                                  </span>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</ng-template>

@@ -1,0 +1,129 @@
+<ul>
+    <!-- Level 1 -->
+    <li class="andro_category-mm-item andro_category-mm-item-has-children">
+        <a style="font-size: 15px;color: black;font-weight: 600;"  type="button" > Denrée alimentaire </a>
+        <ul class="andro_category-mm-2-cols">
+            <!-- Level 2 -->
+            <li>
+                <div class="andro_category-mm-banner">
+                    <img style="height: 200px;" src="{{imagurl}}1.jpeg" alt="megamenu img">
+                    <div class="andro_category-mm-banner-desc">
+                        <h6>Denrée alimentaire</h6>
+                        <p>L'ensemble de toutes nos denrées alimentaires</p>
+                    </div>
+                </div>
+                <!-- Level 2
+                <ul *ngFor="let cate of datas.data">
+                    <li *ngIf="cate.type_produit === 'Produit consommable'" >
+                      <div  href="#">{{cate.label}} </div>
+                    </li>
+                </ul>-->
+                <table>
+                  <tr *ngFor="let cate of categorie">
+                    <th *ngIf="cate.type_produit === 'Produit consommable'">
+                      <a routerLink="/shop-v3/{{cate.id}}:category">
+                        {{cate.label}}
+                      </a>
+                    </th>
+                  </tr>
+                </table>
+            </li>
+        </ul>
+    </li>
+
+    <!-- <li class="andro_category-mm-item"> <a href="#"> Keto</a> </li> -->
+    <li class="andro_category-mm-item andro_category-mm-item-has-children">
+        <a style="font-size: 15px;color: black;font-weight: 600;"  type="button">Phyto</a>
+        <ul class="andro_category-mm-2-cols">
+            <!-- Level 2 -->
+            <li>
+                <div class="andro_category-mm-banner">
+                    <img src="{{imagurl}}2.jpeg" alt="megamenu img">
+                    <div class="andro_category-mm-banner-desc">
+                        <h6>Phyto</h6>
+                        <p>L'ensemble de tous nos phyto</p>
+                    </div>
+                </div>
+                <table>
+                  <tr *ngFor="let cate of categorie">
+                    <th *ngIf="cate.type_produit === 'Intrant'"> <a routerLink="/shop-v3/{{cate.id}}:category"> {{cate.label}}</a></th>
+                  </tr>
+                </table>
+            </li>
+        </ul>
+    </li>
+    <li class="andro_category-mm-item andro_category-mm-item-has-children">
+        <a style="font-size: 15px;color: black;font-weight: 600;"  type="button" >Engrais</a>
+        <ul class="andro_category-mm-2-cols">
+            <!-- Level 2 -->
+            <li>
+                <div class="andro_category-mm-banner">
+                    <img src="{{imagurl}}2.jpeg" alt="megamenu img">
+                    <div class="andro_category-mm-banner-desc">
+                        <h6>Engrais</h6>
+                        <p>L'ensemble de tous nos engrais</p>
+                    </div>
+                </div>
+                <table>
+                  <tr *ngFor="let cate of categorie">
+                    <th *ngIf="cate.type_produit === 'engrais'"> <a routerLink="/shop-v3/{{cate.id}}:category"> {{cate.label}}</a></th>
+                  </tr>
+                </table>
+            </li>
+        </ul>
+    </li>
+        <!-- <li class="andro_category-mm-item"> <a href="#"> Keto</a> </li> -->
+        <li class="andro_category-mm-item andro_category-mm-item-has-children">
+          <a style="font-size: 15px;color: black;font-weight: 600;" type="button" >Machines et outils</a>
+          <ul class="andro_category-mm-2-cols">
+              <!-- Level 2 -->
+              <li>
+                  <div class="andro_category-mm-banner">
+                      <img style="height: 200px;color: black;font-weight: 600;" src="{{imagurl}}3.jpeg" alt="megamenu img">
+                      <div class="andro_category-mm-banner-desc">
+                          <h6>Machines et outils</h6>
+                          <p>L'ensemble de tous nos machines et outils</p>
+                      </div>
+                  </div>
+                    <table style="overflow: auto;">
+                      <tr *ngFor="let cate of categorie">
+                        <th *ngIf="cate.type_produit === 'Outils'"> <a routerLink="/shop-v3/{{cate.id}}:category"> {{cate.label}}</a></th>
+                      </tr>
+                    </table>
+
+              </li>
+          </ul>
+      </li>
+      <!--
+    <li class="andro_category-mm-item"> <a href="#"> Baby & Kids Care</a> </li>
+    <li class="andro_category-mm-item"> <a href="#"> Home Care</a> </li>
+    <li class="andro_category-mm-item"> <a href="#"> Supplements</a> </li>
+    <li class="andro_category-mm-item"> <a href="#"> Beauty Care</a> </li>
+    <li class="andro_category-mm-item andro_category-mm-item-has-children andro_category-mm-item-expand">
+        <a href="#"> <i class="fas fa-plus"></i> More Categories</a>
+        <ul class="andro_category-mm-2-cols">
+            <li>
+                <div class="andro_category-mm-banner">
+                    <img src="assets/img/megamenu/3.jpg" alt="megamenu img">
+                    <div class="andro_category-mm-banner-desc">
+                        <h6>More Categories</h6>
+                        <p>Explore more categories that we offer</p>
+                    </div>
+                </div>
+                <ul>
+                    <li> <a href="#">Vegetables & Fruits</a> </li>
+                    <li> <a href="#">Dairy</a> </li>
+                    <li> <a href="#">Vegan Dairy</a> </li>
+                    <li> <a href="#">Meats & Fish</a> </li>
+                    <li> <a href="#">Breads & Cereal</a> </li>
+                </ul>
+                <ul>
+                    <li> <a href="#">Honey</a> </li>
+                    <li> <a href="#">Jam & Spreads</a> </li>
+                    <li> <a href="#">Legumes</a> </li>
+                    <li> <a href="#">Oils</a> </li>
+                </ul>
+            </li>
+        </ul>
+    </li>-->
+</ul>

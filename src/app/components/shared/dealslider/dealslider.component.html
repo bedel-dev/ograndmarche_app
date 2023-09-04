@@ -1,0 +1,46 @@
+<ngx-slick-carousel #slickModal="slick-carousel" [config]="dealsConfig" class="deals-slider">
+    <!-- Deal Start -->
+    <div ngxSlickItem class="andro_product" *ngFor="let item of allproductionconso | slice:0:3">
+          <!-- Deal Start
+        <div class="andro_product-badge andro_badge-featured" *ngIf="item.featured">
+            <i class="fa fa-star"></i>
+            <span>Featured</span>
+        </div>-->
+        <div class="andro_product-badge andro_badge-sale" *ngIf="item.discount">
+            {{item.discount}}% Off
+        </div>
+        <div class="andro_product-thumb">
+            <a (click)="addNewItem(item.id)" routerLink="/product-single-v2/{{item.id}}"><img src="{{imagurl}}/{{item.urlImageVente}}"alt="{{item.description}}"></a>
+                <!-- Deal Start
+            <div class="andro_countdown-timer">
+                <countdown #cd [config]="{leftTime: item.created_at}"></countdown>
+            </div>-->
+        </div>
+        <div class="andro_product-body">
+            <h5 class="andro_product-title"> <a (click)="addNewItem(item.id)" routerLink="/product-single-v2/{{item.id}}"> {{item.description}} </a></h5>
+            <p>{{item.description}}</p>
+                <!-- Deal Start
+
+            <div class="andro_rating-wrapper">
+                <div class="andro_rating">
+                    <ngb-rating [max]="5" [(rate)]="item.rating" [readonly]="true">
+                        <ng-template let-fill="fill" let-index="index">
+                            <i class="fa fa-star" [class.active]="fill === 100"></i>
+                        </ng-template>
+                    </ngb-rating>
+                </div>
+                <span>{{item.rating}} Stars</span>
+            </div>-->
+
+        </div>
+        <div class="andro_product-footer">
+            <div class="andro_product-price">
+                <span *ngIf="item.discount">${{item.price * (100 - item.discount) / 100 |
+                    number:'1.2-2'}}</span>
+                <span>{{item.prix| number:'1.2-2'}} Fr<span *ngIf="item.typeVente ==='Produit consommable'|| item.typeVente ==='Intrant'">/ Kg</span></span>
+            </div>
+            <button (click)="addNewItem(item.id)" routerLink="/product-single-v2/{{item.id}}" class="andro_btn-custom btn-sm">Detail</button>
+        </div>
+    </div>
+    <!-- Deal End -->
+</ngx-slick-carousel>

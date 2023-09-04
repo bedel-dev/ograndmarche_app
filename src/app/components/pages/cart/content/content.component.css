@@ -1,0 +1,61 @@
+.andro_product.andro_product-list.andro_product-has-controls.andro_product-has-buttons.slick-slide{
+  width: 430px !important;
+}
+.andro_btn-custom_local {
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  white-space: initial;
+  vertical-align: middle;
+  position: relative;
+	background-color: #50BD4D;
+  border: 0;
+	color: #fff;
+	font-size: 13px;
+	font-weight: 600;
+	padding: 5px 10px;
+	-webkit-transition: 0.3s;
+	-o-transition: 0.3s;
+	transition: 0.3s;
+  text-transform: uppercase;
+  border-radius: 25px;
+  z-index: 1;
+  box-shadow: 0 3px 24px rgba(0,0,0,.1);
+}
+
+button:focus {
+  outline: 1px dotted;
+  outline: 5px auto #50BD4D;
+}
+
+
+input[type='radio'] {
+  -webkit-appearance: none;
+  width: 19px;
+  height: 20px;
+  border-radius: 50%;
+  outline: none;
+  border: 3px solid black;
+}
+
+input[type='radio']:before {
+  content: '';
+  display: block;
+  width: 70%;
+  height: 65%;
+  margin: 20% auto;
+  border-radius: 50%;
+}
+
+
+input[type="radio"]:checked:before {
+  background: #50BD4D;
+
+}
+
+input[type="radio"]:checked {
+  border-color:#50BD4D;
+}
+
+
+

@@ -1,0 +1,201 @@
+  /* anim 1 add blink_me class to up element li */
+.blink_me {
+    animation: blinker 1s linear infinite;
+    color: red !important;
+    
+  }
+
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+
+
+  /* anim 2 add anim class to up element li or a  and create different span of letter */
+  @import url("https://fonts.googleapis.com/css2?family=Titan+One&display=swap");
+  .anim {
+    /* width: 100vw; */
+    text-align: center;
+  }
+  .anim span {
+    -webkit-text-stroke-width: 1.25px;
+    -webkit-text-stroke-color: #000;
+    /* text-shadow: 0 0px #f3c623, 0 0px #f2aaaa; */
+    transform: translate(0, 100%) rotate(4deg);
+    animation: jump 2s ease-in-out infinite;
+    display: inline-block;
+    font-family: "Open Sans";
+    color: #fff;
+  }
+  .anim span:nth-child(1) {
+    animation-delay: 120ms;
+  }
+  .anim span:nth-child(2) {
+    animation-delay: 240ms;
+  }
+  .anim span:nth-child(3) {
+    animation-delay: 360ms;
+  }
+  .anim span:nth-child(4) {
+    animation-delay: 480ms;
+  }
+  .anim span:nth-child(5) {
+    animation-delay: 600ms;
+  }
+  .anim span:nth-child(6) {
+    animation-delay: 720ms;
+  }
+  .anim span:nth-child(7) {
+    animation-delay: 840ms;
+  }
+  .anim span:nth-child(8) {
+    animation-delay: 960ms;
+  }
+  .anim span:nth-child(9) {
+    animation-delay: 1080ms;
+  }
+  .anim span:nth-child(10) {
+    animation-delay: 1200ms;
+  }
+  
+  @keyframes jump {
+    33% {
+      /* text-shadow: 0 60px #f37121, 0 50px #f2aaaa; */
+    }
+    50% {
+      /* transform: translate(0, 0) rotate(-4deg);
+      text-shadow: 0 0px #8fc0a9, 0 0px #84a9ac; */
+    }
+    66.67% {
+      /* text-shadow: 0 -60px #d54062, 0 50px #8fc0a9; */
+    }
+  }
+
+  /* anim 3 add wiggle class to up element li  */
+.wiggle {
+  animation: wiggle 1.5s linear infinite;
+}
+
+/* Keyframes */
+@keyframes wiggle {
+  0%, 7% {
+    transform: rotateZ(0);
+  }
+  15% {
+    transform: rotateZ(-15deg);
+  }
+  20% {
+    transform: rotateZ(10deg);
+  }
+  25% {
+    transform: rotateZ(-10deg);
+  }
+  30% {
+    transform: rotateZ(6deg);
+  }
+  35% {
+    transform: rotateZ(-4deg);
+  }
+  40%, 100% {
+    transform: rotateZ(0);
+  }
+}
+
+body {
+  background: #000;
+}
+
+.tests {
+  position: absolute;
+  left: calc(50% - 3em);
+  top: calc(50% - 2em);
+  
+  height: 4em;
+  width: 7em;
+  
+  background: #444;
+  background: linear-gradient(top, #555, #333);
+  border: none;
+  border-top: 3px solid orange;
+  border-radius: 0 0 0.2em 0.2em;
+  color: #fff;
+  font-family: Helvetica, Arial, Sans-serif;
+  font-size: 1em;
+  transform-origin: 50% 5em;
+}
+
+.andro_product.andro_product-has-controls.andro_product-has-buttons.slick-slide {
+  width: 350px !important;
+}
+
+.banner-pop{
+  bottom: 40%;
+  height: 250px;
+  width: 260px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.banner-pop, .banner._pp, .header {
+  z-index: 70;
+  max-width: 310px;
+}
+.banner-pop, .card._sh2 {
+  box-shadow: 0 2px 7px 1px rgb(0 0 0 / 15%);
+}
+
+.banner-pop {
+  left: 9px;
+}
+
+
+.b2top .cta.btn, .banner-pop, .banner._pp, .noti, .popup {
+  position: fixed;
+}
+
+
+
+
+
+.banner-pops {
+  right: 4px;
+}
+
+.banner-pops{
+  bottom: 40%;
+  height: 250px;
+  width: 260px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.banner-pops, .banner._pp, .header {
+  z-index: 70;
+  max-width: 310px;
+}
+.banner-pops, .card._sh2 {
+  box-shadow: 0 2px 7px 1px rgb(0 0 0 / 15%);
+}
+
+.b2top .cta.btn, .banner-pops, .banner._pp, .noti, .popup {
+  position: fixed;
+}
+
+
+
+
+
+
+
+    
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .ov:hover{
+    background-color:#50BD4D !important;
+  }

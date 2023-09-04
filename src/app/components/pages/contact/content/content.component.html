@@ -1,0 +1,239 @@
+<!-- Locations Start -->
+<div class="section section-padding">
+  <!-- -->
+   <!--
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" *ngFor="let item of locationbox">
+                <div class="andro_cta">
+                    <a href="#">
+                        <img [src]="item.photo" alt="{{item.title}}">
+                        <div class="andro_cta-content">
+                            <h4 class="text-white">{{item.title}} <span class="fw-400">{{item.titlespan}}</span> </h4>
+                            <p class="text-white mb-0">{{item.para}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>-->
+</div>
+<!-- Locations Start -->
+<!-- Icons Start -->
+<div class="section section-padding pt-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4" *ngFor="let item of contactinfo">
+                <div class="andro_icon-block">
+                    <a href="{{item.url}}">
+                        <i class="{{item.icon}}"></i>
+                        <h5>{{item.title}}</h5>
+                        <p>{{item.para}}</p>
+                    </a>
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                        <rect height="500" width="500" class="andro_svg-stroke-shape-anim"></rect>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Icons End -->
+<!-- FAQ & Contact Form Start -->
+<div class="section pt-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 mb-lg-30">
+                <div class="section-title">
+                    <h4 class="title">FAQ</h4>
+                </div>
+                <ngb-accordion #acc="ngbAccordion" [closeOthers]="true" activeIds="static-1" class="with-gap">
+                    <ngb-panel id="static-1">
+                        <ng-template ngbPanelTitle>
+                            Pourquoi devenir Vendeur sur "O Grand marché"?
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                            Nous vous permettons d'avoir
+                            des revenus aussi rapidement par ce que nous avons de l'affluence sur le site et un system de recommandation
+                            qui permet de proposer des produits aux utilisateurs.
+                        </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="static-2">
+                        <ng-template ngbPanelTitle>
+                            C'est quoi la plateforme "O Grand marché"
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                          La plateforme "O Grand marché" est une platforme E-commerce qui offre directement des services de vente de produit agricole
+                        </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="static-3">
+                        <ng-template ngbPanelTitle>
+                            Comment devenir Vendeur sur "O Grand marché"?
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                            Il vous suffit de remplir le formulaire "Devenir fournisseur" afin que votre demande soit prise en charge par un service
+                            dedié pour la validation de votre dossier et la creation de votre compte.
+                        </ng-template>
+                    </ngb-panel>
+
+                </ngb-accordion>
+            </div>
+            <div class="col-lg-7">
+                <div class="section-title">
+                    <h4 class="title">Devenir fournisseur 
+                        <span *ngIf ="step===1" style="font-size:24px">/ informations personnelles</span>
+                        <span *ngIf ="step===2" style="font-size:24px">/ cultures</span>
+                        <span *ngIf ="step===3" style="font-size:24px">/ informations bancaires</span>
+                    </h4> 
+                </div>
+                <form  #forunisseurSave = "ngForm" (ngSubmit) = "onClickSubmit(forunisseurSave.value)">
+                    <div *ngIf ="step===1" class="row">
+                        <div class="form-group col-lg-6">
+                            <input type="text" placeholder="Nom" class="form-control" name="fname" id="fname" ngModel value="">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <input type="text" placeholder="Prenom" class="form-control" name="lname" id="fname" ngModel value="">
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <input type="email" placeholder="Email" class="form-control" name="email" id="email" ngModel value="">
+                        </div>
+                        <div class="form-group col-lg-12">
+                          <input type="text" placeholder="Ville" class="form-control" name="ville" id="ville" ngModel value="">
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <input style=""
+                            class="form-control"
+                             placeholder="numero de telephone"
+                             name="phone"
+                             value=""
+                             #telInput
+                             (focus)="onFocus()"
+                             (blur)="onBlur()"
+                             (keypress)="onInputKeyPress($event)"
+                             [(ngModel)]="phoneNumber"
+                             (ngModelChange)="onPhoneNumberChange()"
+                              ngModel>
+                        </div>
+                        <div class="form-group col-lg-12">                        
+                            <input 
+                            list="countrydata"
+                             id="country" 
+                             size="50" 
+                             value={{LieuHabitation}}
+                             class="form-control"
+                             placeholder="Lieu d'habitiation"
+                             name="habitiation"
+                             ng-model="country"
+                             ngModel
+                             (input)="onSearchChangeAbitation($event)"
+                             autocomplete="off" 
+                             />
+                            <div *ngIf="LieuVideAbitation" style="color: red;"  >Indiquez le lieu d'habitation </div>
+                             <datalist id="countrydata">
+                               <option *ngFor="let loc of datalistOptions" >{{loc.description}}</option>
+                             </datalist>
+                        </div>
+                        <div class="form-group col-lg-12">                        
+                            <input 
+                            list="countrydata"
+                             id="country" 
+                             size="50" 
+                             value={{LieuMagasin}}
+                             class="form-control"
+                             placeholder="Emplacement de la boutique"
+                             name="lieuboutique"
+                             ng-model="country"
+                             ngModel
+                             (input)="onSearchChange($event)"
+                             autocomplete="off" 
+                             />
+                            <div *ngIf="LieuVide" style="color: red;" >Indiquez un l'emplacement de la boutique </div>
+                             <datalist id="countrydata">
+                               <option *ngFor="let loc of datalistOptions" >{{loc.description}}</option>
+                             </datalist>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label for="null">Sélectionnez votre pièce d'identité</label>
+                            <input type="text" type="file" (change)="onFileChangeCni($event)" placeholder="Sélectionnez  votre cni" class="form-control" name="cni" id="cni" ngModel value="">
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label for="">Sélectionnez  votre registre de commerce</label>
+                            <input type="text" type="file"    (change)="onFileChangeRegistre($event)"      placeholder="Sélectionnez  votre cni" class="form-control" name="registre" id="registre" ngModel value="">
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label for="">Sélectionnez  votre déclaration fiscale d'existence</label>
+                            <input type="text" type="file"    (change)="onFileChangeDFE($event)"      placeholder="Sélectionnez  votre déclaration fiscale d'existence" class="form-control" name="dfe" id="dfe" ngModel value="">
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <select type="text" placeholder="" class="form-control" [(ngModel)]="typePers" name="typePers" id="typePers" ngModel value="">
+                                <option   selected value="null"   disabled >Personne physique ou morale</option>
+                                <option value="physique">Personne physique</option>
+                                <option value="physique">Personne Morale</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <input style=""
+                            class="form-control"
+                             placeholder="Numéro de téléphone du gérant"
+                             name="gerantphone"
+                             value=""
+                             #telInput2
+                             (focus)="onFocus2()"
+                             (blur)="onBlur2()"
+                             (keypress)="onInputKeyPress2($event)"
+                             [(ngModel)]="phoneNumbergerant"
+                             (ngModelChange)="onPhoneNumberChange()"
+                              ngModel>
+                        </div>
+                    </div>
+                    <div *ngIf ="step===2" class="row">
+                        <div class="form-group col-lg-6">
+                            <input type="text" placeholder="Nom du gérant" class="form-control" name="namegerant" id="namegerant" ngModel value="">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <input type="text" placeholder="Prenom du gérant" class="form-control" name="prenomgerant" id="prenomgerant" ngModel value="">
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label for="null">Sélectionnez  plusieurs type de produit a mettre en vente</label>
+                            <div>
+                                <input [value]="'Denrée alimantaire'"   (change)="choice($event)"  type="checkbox"> <label for=""  style="padding-left: 5px; color:#6e6e6e" > Denrée alimantaire</label>
+                            </div>  
+                            <div>
+                                <input [value]="'engrais'"  (change)="choice($event)"type="checkbox"> <label for=""  style="padding-left: 5px; color:#6e6e6e" >Engrais</label>
+                            </div>
+                            <div>
+                                <input [value]="'Intrant'"  (change)="choice($event)"type="checkbox"> <label for=""  style="padding-left: 5px; color:#6e6e6e" >Phyto</label>
+                            </div>
+                            <div>
+                                <input [value]="'Outils'"  (change)="choice($event)" type="checkbox"> <label for=""  style="padding-left: 5px; color:#6e6e6e" >Machines et outils</label>
+                            </div>
+                            <div *ngIf="TypeVide" style="color: red;" >Sélectionnez  un ou plusieurs types de produits </div>
+                        </div>
+
+                        <div *ngIf="this.TypeVenteChoisi.length !==0" class="form-group col-lg-12">
+                            <label for="null">Sélectionnez  plusieurs categories de produit a mettre en vente</label>
+                            <div *ngFor="let item of Categorie">
+                                <input [value]="item.label"  (change)="choiceCategorie($event)"  type="checkbox"> <label for=""  style="padding-left: 5px; color:#6e6e6e" > {{item.label}}</label>
+                            </div>
+                            <div *ngIf="CateVide" style="color: red;" >Sélectionnez  une ou  plusieurs categories de produits </div>
+
+                        </div>
+                    </div>
+                    <div *ngIf ="step>=3" class="row">
+                        <div class="form-group col-lg-6">
+                            <input type="text" placeholder="Nom de la banque" class="form-control" name="namebank" id="namebank" ngModel value="">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <input type="text" placeholder="Numéro du compte" class="form-control" name="Numerocompte" id="Numerocompte" ngModel value="">
+                        </div>
+                    </div>
+                    <a  *ngIf ="step!=1"  (click)="retour()"  style="margin-right: 10px;"  class="andro_btn-custom primary" name="button">Retour</a>
+                    <button  *ngIf ="step!=3 &&step<3"   style="margin-right: 10px;"  class="andro_btn-custom primary" name="button">Suivant</button>
+                    <button  *ngIf ="step >=3" type="submit" class="andro_btn-custom primary" name="button">Faire ma demande</button>
+               
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FAQ & Contact Form End -->
