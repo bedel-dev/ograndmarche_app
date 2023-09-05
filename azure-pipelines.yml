@@ -19,4 +19,4 @@ steps:
     npm install -g @angular/cli
     npm install --legacy-peer-deps
     ng build --prod
-  displayName: 'npm install and build'
+  displayName: 'npm install --legacy-peer-deps and build'
