@@ -1,9 +1,0 @@
-{
-    "routes": [
-      {
-        "route": "/organdmarche/*",  
-        "rewrite": "/organdmarche/index.html"
-      }
-    ]
-  }
-  
