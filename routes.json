@@ -1,0 +1,13 @@
+{
+    "routes": [
+      {
+        "route": "/organdmarche/*",  
+        "rewrite": "/organdmarche/index.html"
+      },
+      {
+        "route": "/*",  
+        "rewrite": "/index.html"
+      }
+    ]
+  }
+  
