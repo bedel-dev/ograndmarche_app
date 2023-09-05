@@ -54,9 +54,9 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           skip_app_build: true
           app_location: ${{ env.APP_LOCATION }}
-          api_location: ${{ env.API_LOCATION }}
+          #api_location: ${{ env.API_LOCATION }}
           #output_location: ${{ env.OUTPUT_LOCATION}}
-          app_artifact_location: ${{ env.APP_ARTIFACT_LOCATION }}
+          #app_artifact_location: ${{ env.APP_ARTIFACT_LOCATION }}
           ###### End of Repository/Build Configurations ######
         env:
           NPM_CONFIG_LEGACY_PEER_DEPS: true
