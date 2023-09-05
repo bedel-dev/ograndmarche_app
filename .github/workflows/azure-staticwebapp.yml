@@ -55,15 +55,9 @@ jobs:
           api_location: ${{ env.API_LOCATION }}
           app_artifact_location: ${{ env.APP_ARTIFACT_LOCATION }}
           ###### End of Repository/Build Configurations ######
-# Configuration NPM_CONFIG_LAGACY_PEER_DEPS
-build:
-  preBuild:
-    commands:
-      - npm config set legacy-peer-deps true
-      - npm install
+        env:
+          NPM_CONFIG_LEGACY_PEER_DEPS: true
 
-
-      
   close_pull_request_job:
     permissions:
       contents: none
