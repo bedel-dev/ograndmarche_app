@@ -21,7 +21,7 @@ on:
 
 # Environment variables available to all jobs and steps in this workflow
 env:
-  APP_LOCATION: "/ograndmarche" # location of your client code
+  APP_LOCATION: "organdmarche/dist/organdmarche" # location of your client code
   API_LOCATION: "" # location of your api source code - optional
   APP_ARTIFACT_LOCATION: "organdmarche/dist/organdmarche" # location of client code build output
   OUTPUT_LOCATION: "organdmarche/dist/organdmarche" # location of
