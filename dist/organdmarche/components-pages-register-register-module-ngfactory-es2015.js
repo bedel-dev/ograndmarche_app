@@ -552,7 +552,7 @@ class RegisterComponent {
         this.instaclassname = "secondary-bg";
         // Footer style
         this.classname = "";
-        this.ftlogo = "assets/img/logo.png";
+        this.ftlogo = "assets/img/logo_ready.png";
     }
     ngOnInit() {
     }

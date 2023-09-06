@@ -11,7 +11,7 @@ export class CommandeComponent implements OnInit {
   instaclassname = "primary-bg";
   // Footer style
   classname = "";
-  ftlogo = "assets/img/logo.png"
+  ftlogo = "assets/img/logo_ready.png"
   ngOnInit(): void {
   }
 

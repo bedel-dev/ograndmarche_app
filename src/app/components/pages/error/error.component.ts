@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ErrorComponent implements OnInit {
   // Footer style
   classname = "";
-  ftlogo = "assets/img/logo.png"
+  ftlogo = "assets/img/logo_ready.png"
 
   constructor() { }
 

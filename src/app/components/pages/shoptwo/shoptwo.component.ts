@@ -10,7 +10,7 @@ export class ShoptwoComponent implements OnInit {
   instaclassname = "secondary-bg";
   // Footer style
   classname = "";
-  ftlogo = "assets/img/logo.png"
+  ftlogo = "assets/img/logo_ready.png"
 
   constructor() { }
 
