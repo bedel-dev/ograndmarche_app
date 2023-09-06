@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/mac/Documents/2PAI_MIGRATION_PROJECT/ogrand_marche_app/ograndmarche/src/polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! /Users/mac/Documents/2PAI_MIGRATION_PROJECT/ogrand_marche_app/src/polyfills.ts */"hN/g");
 
 
 /***/ }),
