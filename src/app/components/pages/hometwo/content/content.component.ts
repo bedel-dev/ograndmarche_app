@@ -50,6 +50,7 @@ export class ContentComponent implements OnInit {
   Engrais = 0
   getAllProduitVente(){
     this.produitService.GetAllProduitVente().subscribe((prod:any)=>{
+      console.log("prod",prod);
       prod.data.forEach(element => {
         this.ProduitVente.push(element);
       });
