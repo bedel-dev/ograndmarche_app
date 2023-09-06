@@ -190,21 +190,30 @@ onPhoneNumberChange = () =>{
      // console.log("resultat: ",res);
      if(res['code'] === 200){
 
-      localStorage.removeItem('iduser');
-      localStorage.removeItem('token');
-      localStorage.removeItem('name');
-
-      localStorage.setItem('iduser',res['data']['id'])
-      localStorage.setItem('token',res['token'])
-      localStorage.setItem('name',res['data']['name'])
-      console.log("voici le token connexion: ",res['token'])
-      if(this.panierService.getCart().length>0){
-        this.router.navigate(['/cart']);
-        console.log('je suis ici')
+      if(res['data']['role']=="gpublic"){
+        localStorage.removeItem('iduser');
+        localStorage.removeItem('token');
+        localStorage.removeItem('name');
+  
+        localStorage.setItem('iduser',res['data']['id'])
+        localStorage.setItem('token',res['token'])
+        localStorage.setItem('name',res['data']['name'])
+        console.log("voici le token connexion: ",res['token'])
+        if(this.panierService.getCart().length>0){
+          this.router.navigate(['/cart']);
+          console.log('je suis ici')
+        }else{
+          this.router.navigate(['/']);
+        }
       }else{
-        this.router.navigate(['/']);
+        Swal.fire({
+          icon: 'error',
+          title: 'Connexion echoué!',
+          text: "Creer un compte grand public cliquez sur 'Inscrivez vous'",
+          showConfirmButton: true,
+          timer: 1000
+        });
       }
-
      }else{
       this.phoneNumber =""
       //this.alertConfirmation()
