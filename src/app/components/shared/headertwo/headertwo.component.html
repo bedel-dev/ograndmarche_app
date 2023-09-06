@@ -7,10 +7,10 @@
                 <!-- Logo -->
                 <a class="navbar-brand" routerLink="/"> <img src="assets/img/logo_ready.png" alt="logo"> </a>
                 <!-- Search Form -->
-                <div class="andro_search-adv">
+                <div class="andro_search-adv" style="width: 42%;">
                     <form style="box-shadow: 0 4px 8px 0 rgba(0,0,0,.2); border-radius: 25px 25px 25px 25px;"  #searchProduct="ngForm" (ngSubmit) = "onClickSubmit(searchProduct.value)">
                         <div   class="andro_search-adv-cats search">
-                            <span>Toutes les categories</span>
+                            <span>Categories</span>
                             <div  class="sub-menu">
                                 <div class="andro_dropdown-scroll">
                                     <label *ngIf="isCheckedConsomableView">
@@ -32,6 +32,7 @@
                             </div>
                         </div>
                         <div  class="andro_search-adv-input">
+                            
                             <input ngModel type="text" style="background: #F0F2F3;" class="form-control" placeholder="Rechercher un produit" name="search" value="">
                             <button class="search" style="width:130px; background:orange" type="submit" name="button">
                                 <a style="font-weight: 900; margin-right:5px; color:white;"><i class="fa fa-search"></i></a>

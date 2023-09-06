@@ -40,8 +40,12 @@ export class HeadertwoComponent implements OnInit {
     Swal.fire('Deconnexion!!!')
     Swal.showLoading(Swal.getDenyButton())
     this.Userservice.logout();
-    this.getuser()
-    this.router.navigate(['/']);
+    this.router.navigateByUrl('/', { skipLocationChange: true })
+      .then(() => {
+          this.router.navigate(['/login']);
+    });
+    //this.getuser()
+    //this.router.navigate(['/']);
     Swal.close();
   }
 

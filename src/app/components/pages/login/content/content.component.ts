@@ -145,7 +145,11 @@ onPhoneNumberChange = () =>{
   // do connexion
   onClickSubmit(data) {
     //localStorage.clear();
-    Swal.fire('Patientez svp!!!')
+    Swal.fire({
+      title: 'Patientez svp!!!',
+      text:  '',
+      showConfirmButton: false,
+    });
     Swal.showLoading(Swal.getDenyButton())
      var email = data.username;
      var pass = data.password;
@@ -154,8 +158,8 @@ onPhoneNumberChange = () =>{
         icon: 'warning',
         title: 'Entrez un contact de 10 chiffre!',
         text:  '',
-        showConfirmButton: true,
-        timer: 2000
+        showConfirmButton: false,
+        timer: 3000
       });
 
     }else if(this.phoneNumber.length == 10){
@@ -167,8 +171,8 @@ onPhoneNumberChange = () =>{
         icon: 'warning',
         title: 'Entrez un contact de 10 chiffre!',
         text:  '',
-        showConfirmButton: true,
-        timer: 2000
+        showConfirmButton: false,
+        timer: 3000
       });
     }
     let user = {
@@ -198,7 +202,7 @@ onPhoneNumberChange = () =>{
         localStorage.setItem('iduser',res['data']['id'])
         localStorage.setItem('token',res['token'])
         localStorage.setItem('name',res['data']['name'])
-        console.log("voici le token connexion: ",res['token'])
+        //console.log("voici le token connexion: ",res['token'])
         if(this.panierService.getCart().length>0){
           this.router.navigate(['/cart']);
           console.log('je suis ici')
@@ -210,8 +214,8 @@ onPhoneNumberChange = () =>{
           icon: 'error',
           title: 'Connexion echoué!',
           text: "Creer un compte grand public cliquez sur 'Inscrivez vous'",
-          showConfirmButton: true,
-          timer: 1000
+          showConfirmButton: false,
+          timer: 3000
         });
       }
      }else{
@@ -222,8 +226,8 @@ onPhoneNumberChange = () =>{
         icon: 'error',
         title: 'Connexion echoué!',
         text: 'Email ou mot de passe incorrecte',
-        showConfirmButton: true,
-        timer: 1000
+        showConfirmButton: false,
+        timer: 3000
       });
      }
     }
