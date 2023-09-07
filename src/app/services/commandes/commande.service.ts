@@ -308,10 +308,28 @@ export class CommandeService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
-  })
+   })
    return this.http.get(GlobalConstants.api_auth+"/getuser/"+ localStorage.getItem('iduser')+".json",{ headers: headers })
   }
   getloc(text:String,tokensession:String){
-   return this.http.get("https://maps.googleapis.com/maps/api/place/autocomplete/json?input="+text+"&language=fr&components=country:ci&key=AIzaSyCucatgvP-JcsWSFdofdqQ_nbgyimkVpMo&sessiontoken="+tokensession)
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*'
+   })
+   //return this.http.get("https://maps.googleapis.com/maps/api/place/autocomplete/json?input="+text+"&language=fr&components=country:ci&key=AIzaSyCucatgvP-JcsWSFdofdqQ_nbgyimkVpMo&sessiontoken="+tokensession,{ headers: headers })
+   return this.http.get("https://maps.googleapis.com/maps/api/place/autocomplete/json?input="+text+"&language=fr&components=country:ci&key=AIzaSyCucatgvP-JcsWSFdofdqQ_nbgyimkVpMo&sessiontoken="+tokensession,{ headers: headers })
+
+  }
+
+  async fetchData(url: string): Promise<any> {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('La requête a échoué.');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Erreur de la requête:', error);
+      throw error;
+    }
   }
 }
