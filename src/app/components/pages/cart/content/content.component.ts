@@ -52,7 +52,7 @@ export class ContentComponent implements OnInit {
   Abidjan:boolean = true;
 
     Lieulivraison:string = ""
-  checkValueLivraison(data){
+  checkValueLivraison(data: string){
     this.transportfrais = parseInt(data);
    // if(data =="horsAbidjan"){
     //   this.Abidjan = false
@@ -67,7 +67,7 @@ export class ContentComponent implements OnInit {
     // }
   }
 
-  TypePaiement(data){
+  TypePaiement(data: string){
 
 
     if(data=="LivraisonPaiement"){
@@ -116,7 +116,7 @@ export class ContentComponent implements OnInit {
   //console.log(myFormattedDateFin);
   }
   errormodepaie = false
-  submit(data){
+  submit(data: any){
     console.log("lieu :",this.Lieulivraison)
 
     if(this.Lieulivraison ==""){
@@ -203,7 +203,7 @@ export class ContentComponent implements OnInit {
   public transportfrais:number;
   //{ id: number, qty: number, price: number }[]
   public calculateprice() {
-    var total;
+    var total: { totalAmount: any; };
     total = this.panierService.getTotalAmount();
     //return this.panier.reduce((subtotal, item) => subtotal + item.qty * item.price, 0)
    // console.log(total.totalAmount)
@@ -304,8 +304,9 @@ onSearchChange(searchValue: any): void {
   var sessionToken = String(Math.floor(100000 + Math.random() * 900000))
   this.Lieulivraison = searchValue.target.value
   this.commandeService.getloc(searchValue.target.value,sessionToken).subscribe((localite:any)=>{
+    console.log(localite.response);
     this.datalistOptions= []
-    localite.predictions.forEach(element => {
+    localite.response.predictions.forEach((element: any) => {
     this.datalistOptions.push(element)
     this.cdr.detectChanges();
     });
@@ -389,7 +390,7 @@ onSearchChange(searchValue: any): void {
  imagurl = GlobalConstants.host+"/img/produit_image/"
  removeitem(id:any) {
 
-  const filteredItems = this.panierService.getCart().filter(function(item) {
+  const filteredItems = this.panierService.getCart().filter(function(item: { id: any; }) {
   return item.id !== id
   })
   this.cart = filteredItems;

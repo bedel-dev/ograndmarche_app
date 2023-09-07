@@ -312,11 +312,15 @@ export class CommandeService {
    return this.http.get(GlobalConstants.api_auth+"/getuser/"+ localStorage.getItem('iduser')+".json",{ headers: headers })
   }
   getloc(text:String,tokensession:String){
-    const headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*'
-   })
+    var body = 
+    //JSON.stringify(
+      {
+        "text": text,
+        "tokensession":tokensession
+      }
+    //);
    //return this.http.get("https://maps.googleapis.com/maps/api/place/autocomplete/json?input="+text+"&language=fr&components=country:ci&key=AIzaSyCucatgvP-JcsWSFdofdqQ_nbgyimkVpMo&sessiontoken="+tokensession,{ headers: headers })
-   return this.http.get("https://maps.googleapis.com/maps/api/place/autocomplete/json?input="+text+"&language=fr&components=country:ci&key=AIzaSyCucatgvP-JcsWSFdofdqQ_nbgyimkVpMo&sessiontoken="+tokensession,{ headers: headers })
+   return this.http.post(GlobalConstants.apiURL+"/prixmarcher/getplace.json?espace=ecommerce",body)
 
   }
 
