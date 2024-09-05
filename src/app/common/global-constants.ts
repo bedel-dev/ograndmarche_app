@@ -19,3 +19,4 @@ export class GlobalConstants {
     public static api_auth: string = "https://ogrand-marchez-api-auth.azurewebsites.net/app_auth/users";
     public static host: string = "https://ogrand-marchez-api-ppai.azurewebsites.net/app_ppai/webroot/";
 }
+
