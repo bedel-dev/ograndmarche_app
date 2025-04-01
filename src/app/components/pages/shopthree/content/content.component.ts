@@ -173,7 +173,6 @@ this.produitService.GetAllProduit().subscribe((res : Prodruit)=>{
     this.produits.data.forEach(element => {
       
       for(let prod of this.ProduitVente){
-
         if(element.idProduit===prod.id.toString()){
           element.urlImageVentePrincipal = element.urlImageVente
           element.label = element.description
