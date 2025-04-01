@@ -175,8 +175,10 @@ this.produitService.GetAllProduit().subscribe((res : Prodruit)=>{
       for(let prod of this.ProduitVente){
 
         if(element.idProduit===prod.id.toString()){
-          element.urlImageVentePrincipal = prod.urlimage
-          element.label = prod.label
+          element.urlImageVentePrincipal = element.urlImageVente
+          element.label = element.description
+          // element.urlImageVentePrincipal = prod.urlimage
+          // element.label = prod.label
           element.categorieProduitId = prod.categorie
         //  console.log(element.urlImageVentePrincipal)
         }

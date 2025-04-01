@@ -89,8 +89,11 @@ export class ContentComponent implements OnInit {
       for(let prod of this.ProduitVente){
 
         if(element.idProduit===prod.id.toString()){
-          element.urlImageVentePrincipal = prod.urlimage
-          element.label = prod.label
+          element.urlImageVentePrincipal = element.urlImageVente
+          element.label = element.description
+
+          //element.urlImageVentePrincipal = prod.urlimage
+          // element.label = prod.label
         }
       }
       this.produitrecent.reverse();
