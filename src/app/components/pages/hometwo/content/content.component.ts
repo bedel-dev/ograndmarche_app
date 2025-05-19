@@ -92,7 +92,7 @@ export class ContentComponent implements OnInit {
           element.urlImageVentePrincipal = element.urlImageVente
           element.label = element.description
           if(element.description.toString().includes("<=:=>")){
-            var splitdescription = element.data.description.toString().split("<=:=>");
+            var splitdescription = element.description.toString().split("<=:=>");
             element.description = splitdescription[0]
             element.label = splitdescription[1]
             console.log("itemr :",splitdescription)

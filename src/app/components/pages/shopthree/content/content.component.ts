@@ -72,7 +72,7 @@ export class ContentComponent implements OnInit {
     }
 
   }
-  public  produits: Prodruit;
+  public  produits: any;
   //public allproduct:any[] = [];
   public allproduct:any[] = [];
   public allcategorie:any[] = [];
@@ -157,7 +157,7 @@ export class ContentComponent implements OnInit {
   })
   console.log("category :",this.allcategorie)
 
-this.produitService.GetAllProduit().subscribe((res : Prodruit)=>{
+this.produitService.GetAllProduit().subscribe((res : any)=>{
     if(this.param_search.includes(":")){
       var newparam = this.param_search.split(":")
       this.param_search = newparam[0]
@@ -179,6 +179,13 @@ this.produitService.GetAllProduit().subscribe((res : Prodruit)=>{
           // element.urlImageVentePrincipal = prod.urlimage
           // element.label = prod.label
           element.categorieProduitId = prod.categorie
+          
+          if(element.description.toString().includes("<=:=>")){
+            var splitdescription = element.description.toString().split("<=:=>");
+            element.description = splitdescription[0]
+            element.label = splitdescription[1]
+            console.log("itemr :",splitdescription)
+          }
         //  console.log(element.urlImageVentePrincipal)
         }
       }
