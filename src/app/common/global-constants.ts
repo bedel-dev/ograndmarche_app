@@ -18,4 +18,7 @@ export class GlobalConstants {
     public static apiURL: string = "https://ograndmarche-api-rec-ppai.azurewebsites.net/app_ppai";
     public static api_auth: string = "https://ograndmarche-api-rec.azurewebsites.net/app_auth/users";
     public static host: string = "https://ograndmarche-api-rec-ppai.azurewebsites.net/app_ppai/webroot/";
+    public static hostFrontendprod: string = "https://admin-rec.ograndmarche.com/#/auth/login";
+    // public static api_auth: string = "https://ograndmarche-api-rec.azurewebsites.net/app_auth/users";
+
 }
