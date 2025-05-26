@@ -3,6 +3,8 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChil
 import { Router } from '@angular/router';
 import intlTelInput from 'intl-tel-input';
 import { GlobalConstants } from 'src/app/common/global-constants';
+import { CommandeService } from 'src/app/services/commandes/commande.service';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class ContentComponent implements OnInit {
 
-  constructor(public http:HttpClient,private router: Router) { 
+  constructor(public http:HttpClient,private router: Router,public commandeService:CommandeService) { 
     
   }
   typeVente:string = "prod";
@@ -304,7 +306,16 @@ onFileChangeRegistre(event:any) {
         //     timer: 2000
         //   });
         // }
-
+        if(this.email==''){
+          match = false;
+          Swal.fire({
+            icon: 'warning',
+            title: "Veuillez entrez votre adresse email!",
+            text:  'Veuillez entrez votre adresse email!',
+            showConfirmButton: true,
+            timer: 3000
+          });
+        }
 
       }else{
         //match = false;
@@ -411,6 +422,7 @@ onFileChangeRegistre(event:any) {
         showConfirmButton: true,
         timer: 2000
       });
+      this.commandeService.SendEmailAlert({nom:this.nom,prenom:this.prenom});
     var  isUplaod = false
       if(this.file_registre!=null &&this.file_cni!=null){
         this.UplaodIamge(this.file_registre).subscribe((res:any)=>{

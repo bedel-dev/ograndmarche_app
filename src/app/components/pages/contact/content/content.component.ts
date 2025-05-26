@@ -368,6 +368,17 @@ onFileChangeDFE(event:any) {
             timer: 3000
           });
         }
+
+        if(this.email==''){
+          match = false;
+          Swal.fire({
+            icon: 'warning',
+            title: "Veuillez entrez votre adresse email!",
+            text:  'Veuillez entrez votre adresse email!',
+            showConfirmButton: true,
+            timer: 3000
+          });
+        }
       }else{
         match = false;
         Swal.fire({
@@ -463,7 +474,9 @@ onFileChangeDFE(event:any) {
        })
       .subscribe((res) =>{
       console.log(res);
+      
       if(res['response']['code'] === "200"){
+
        Swal.fire({
         icon: 'success',
         title: 'Bienvenue',
@@ -471,6 +484,7 @@ onFileChangeDFE(event:any) {
         showConfirmButton: true,
         timer: 2000
       });
+      this.commandeService.SendEmailAlert({nom:this.nom,prenom:this.prenom});
     var  isUplaod = false
       this.UplaodIamge(this.file_registre).subscribe((res:any)=>{
         console.log(res)
