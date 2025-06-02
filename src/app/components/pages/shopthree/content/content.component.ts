@@ -158,12 +158,14 @@ export class ContentComponent implements OnInit {
   console.log("category :",this.allcategorie)
 
 this.produitService.GetAllProduit().subscribe((res : any)=>{
+    // console.log("parametre : ",this.param_search)
     if(this.param_search.includes(":")){
       var newparam = this.param_search.split(":")
       this.param_search = newparam[0]
       this.typesearch = newparam[1]
     }
-
+    console.log("parametre : ",this.param_search)
+    
   //  console.log("parametre : ",this.param_search,this.typesearch)
    //console.log("parametre recent : ",res.data) categorieProduitId
 
@@ -171,8 +173,11 @@ this.produitService.GetAllProduit().subscribe((res : any)=>{
   //  console.log(this.produits)
 
     this.produits.data.forEach(element => {
-      
+      // console.log("description : ",element.description.toLowerCase())
+
+
       for(let prod of this.ProduitVente){
+        console.log("description : ",element.description.toLowerCase())
         if(element.idProduit===prod.id.toString()){
           element.urlImageVentePrincipal = element.urlImageVente
           element.label = element.description
@@ -184,11 +189,16 @@ this.produitService.GetAllProduit().subscribe((res : any)=>{
             var splitdescription = element.description.toString().split("<=:=>");
             element.description = splitdescription[0]
             element.label = splitdescription[1]
-            console.log("itemr :",splitdescription)
+            // console.log("itemr :",splitdescription)
           }
         //  console.log(element.urlImageVentePrincipal)
         }
       }
+
+      // if(element.label.toLowerCase().includes(this.param_search.toLowerCase())){
+      //   console.log("description in : ",element.description.toLowerCase())
+      //   console.log("typesearch in : ",this.typesearch)
+      // }
 
       this.allcategorie.forEach(cate => {
 
@@ -196,7 +206,8 @@ this.produitService.GetAllProduit().subscribe((res : any)=>{
           element.categorie = cate.label
         }
       });
-      console.log(element)
+      
+      // console.log(element)
       // console.log("parametre recent : ",element)
       if(this.param_search ==="recent"){
        // console.log("parametre recent : ",element)
@@ -244,7 +255,8 @@ this.produitService.GetAllProduit().subscribe((res : any)=>{
         this.allproduct.push(element);
         this.allproduct.reverse()
       }
-      if(this.typesearch=="search"&& element.description.toLowerCase().includes(this.param_search.toLowerCase())){
+
+      if(this.typesearch=="search"&& element.description.toLowerCase().includes(this.param_search.toLowerCase())|| element.label.toLowerCase().includes(this.param_search.toLowerCase())){
         this.allproduct.push(element);
         this.allproduct.reverse()
       }
