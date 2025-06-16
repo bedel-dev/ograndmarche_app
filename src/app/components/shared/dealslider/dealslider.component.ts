@@ -52,11 +52,19 @@ export class DealsliderComponent implements OnInit {
     this.produits = res;
     this.produits.data.forEach(element => {
        if(element['typeVente'] === this.item){
+
+        if( element.description.toString().includes("<=:=>")){
+          var splitdescription =  element.description.toString().split("<=:=>");
+          element.description = splitdescription[0]
+          element.label = splitdescription[1]
+          console.log("itemr :",splitdescription)
+        }
         this.allproductionconso.push(element);
+        console.log("allproductionconso :",this.allproductionconso)
        }
       });
     });
-    console.log("item  :",this.item)
+    console.log("item____  :",this.item)
   }
   addNewItem(value: string) {
     this.newItemEvent.emit(value);

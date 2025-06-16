@@ -48,7 +48,8 @@
                                     <p><strong  class="custom-primary">{{item.user}}</strong> </p>
                                     <h1> {{item.title}} <span class="fw-400">{{item.titlespan}}</span> </h1>
                                     <p>{{item.para}}</p>
-                                    <a style="box-shadow: 0 4px 8px 0 rgba(0,0,0,.2); border-radius: 25px 25px 25px 25px;" routerLink="/product-single-v2/{{item.idproduit}}" class="andro_btn-custom">Voir plus</a>
+                                    <a *ngIf="item.id == 1 && item.user == 'Jean Felix'" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,.2); border-radius: 25px 25px 25px 25px;" class="andro_btn-custom">Voir plus</a>
+                                    <a *ngIf="item.id != 1 && item.user != 'Jean Felix'" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,.2); border-radius: 25px 25px 25px 25px;" routerLink="/product-single-v2/{{item.idproduit}}" class="andro_btn-custom">Voir plus</a>
                                 </div>
                                 <div class="col-lg-6 d-none d-lg-block">
                                     <img   style="box-shadow: 0 4px 8px 0 rgba(0,0,0,.2); border-radius: 25px 25px 25px 25px;" src="{{imagurl}}/{{item.photo}}" alt="{{item.title}}">

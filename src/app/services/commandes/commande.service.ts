@@ -5,6 +5,7 @@ import { GlobalConstants } from '../../common/global-constants';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { PanierService } from '../paniers/panier.service';
+import { data } from 'jquery';
 
 @Injectable({
   providedIn: 'root'
@@ -132,7 +133,7 @@ export class CommandeService {
        number -= 1;
       // console.log(item)
         this.AddProduitCommande(item,number,idcommande)
-
+        
         // add notification
         
      }
@@ -169,6 +170,53 @@ export class CommandeService {
    );
    return re;
   }
+
+  SendEmail(datas){
+    let iduser = localStorage.getItem('iduser');
+
+    console.log(this.token);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    })
+
+    var data = {
+      "state":"initiated",
+      "vendeurId":datas.Idvendeur,
+      "url":GlobalConstants.hostFrontendprod,
+    }
+    const body=JSON.stringify(data);
+    //console.log("body :",body)
+    this.http.post(GlobalConstants.api_auth+'/sendmailConfirme.json', body, {
+       headers: headers,
+     }).subscribe((d:any)=>{
+      console.log("result : ",d)
+     })
+  }
+
+  SendEmailAlert(datas){
+    let iduser = localStorage.getItem('iduser');
+
+    console.log(this.token);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    })
+
+    var data = {
+      "userconnected":datas.nom+" "+datas.prenom,
+      "url":GlobalConstants.hostFrontendprod,
+      "type":"alert",
+    }
+    const body=JSON.stringify(data);
+    //console.log("body :",body)
+    this.http.post(GlobalConstants.api_auth+'/sendmailConfirme.json', body, {
+       headers: headers,
+     }).subscribe((d:any)=>{
+      console.log("result : ",d)
+     })
+  }
+
   CreateNotification(datas){
     let iduser = localStorage.getItem('iduser');
 
@@ -236,6 +284,7 @@ export class CommandeService {
      }
     else if(res['response']['code'] === "200"){
       this.CreateNotification(data);
+      this.SendEmail(produitcommande);
       if(listenumer ===0){
         this.testvar.push("1");
         console.log("this.testvar :",this.testvar);

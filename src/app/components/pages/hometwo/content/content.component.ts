@@ -89,8 +89,16 @@ export class ContentComponent implements OnInit {
       for(let prod of this.ProduitVente){
 
         if(element.idProduit===prod.id.toString()){
-          element.urlImageVentePrincipal = prod.urlimage
-          element.label = prod.label
+          element.urlImageVentePrincipal = element.urlImageVente
+          element.label = element.description
+          if(element.description.toString().includes("<=:=>")){
+            var splitdescription = element.description.toString().split("<=:=>");
+            element.description = splitdescription[0]
+            element.label = splitdescription[1]
+            console.log("itemr :",splitdescription)
+          }
+          //element.urlImageVentePrincipal = prod.urlimage
+          // element.label = prod.label
         }
       }
       this.produitrecent.reverse();
@@ -182,7 +190,7 @@ export class ContentComponent implements OnInit {
     {
       idproduit:1,
       photo: "tomate1.jpeg",
-      user: "Bedel coulibaly",
+      user: "Jean Felix",
       title: "Tomate",
       titlespan: "en vente",
       para: "Tomate de la région du Belier, produit dans les meilleures conditions",

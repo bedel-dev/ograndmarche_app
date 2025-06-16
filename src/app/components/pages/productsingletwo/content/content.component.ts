@@ -46,6 +46,13 @@ export class ContentComponent implements AfterContentInit {
           this.shopbox.categorie = cate.label
         }
       });
+
+      if( this.shopbox.description.toString().includes("<=:=>")){
+        var splitdescription =  this.shopbox.description.toString().split("<=:=>");
+        this.shopbox.description = splitdescription[0]
+        this.shopbox.label = splitdescription[1]
+        console.log("itemr :",splitdescription)
+      }
    });
 
   }

@@ -17,7 +17,11 @@
     /***/
     function _(module, exports, __webpack_require__) {
       module.exports = __webpack_require__(
+<<<<<<< HEAD
       /*! /Users/osx/Documents/projets/Lidar/ppai/ograndmarche_app/src/main.ts */
+=======
+      /*! /Users/macbookpro/Documents/app/DAR/ograndmarche_app/src/main.ts */
+>>>>>>> origin/main
       "zUnb");
       /***/
     },
@@ -964,9 +968,16 @@
         _classCallCheck(this, GlobalConstants);
       });
 
+<<<<<<< HEAD
       GlobalConstants.apiURL = "https://ogrand-marchez-api-ppai.azurewebsites.net/app_ppai";
       GlobalConstants.api_auth = "https://ogrand-marchez-api-auth.azurewebsites.net/app_auth/users";
       GlobalConstants.host = "https://ogrand-marchez-api-ppai.azurewebsites.net/app_ppai/webroot/";
+=======
+      GlobalConstants.apiURL = "https://ograndmarche-api-rec-ppai.azurewebsites.net/app_ppai";
+      GlobalConstants.api_auth = "https://ograndmarche-api-rec.azurewebsites.net/app_auth/users";
+      GlobalConstants.host = "https://ograndmarche-api-rec-ppai.azurewebsites.net/app_ppai/webroot/";
+      GlobalConstants.hostFrontendprod = "https://admin-rec.ograndmarche.com/#/auth/login";
+>>>>>>> origin/main
       /***/
     },
 

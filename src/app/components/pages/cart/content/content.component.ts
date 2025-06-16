@@ -243,6 +243,17 @@ export class ContentComponent implements OnInit {
       console.log(this.cart)
       this.produitService.GetAllProduit().subscribe((res : Prodruit)=>{
       this.shopbox = res.data;
+
+      this.shopbox.forEach(element => {
+        if(element.description.toString().includes("<=:=>")){
+          var splitdescription = element.description.toString().split("<=:=>");
+          element.description = splitdescription[0]
+          element.label = splitdescription[1]
+          console.log("itemr :",splitdescription)
+        }
+      });
+
+
     //  console.log(this.shopbox);
       // this.produits.data.forEach(element => {
       //    if(element['typeVente'] === this.item){
