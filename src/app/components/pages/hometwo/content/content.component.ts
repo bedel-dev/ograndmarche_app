@@ -190,7 +190,7 @@ export class ContentComponent implements OnInit {
     {
       idproduit:1,
       photo: "tomate1.jpeg",
-      user: "Bedel coulibaly",
+      user: "Jean Felix",
       title: "Tomate",
       titlespan: "en vente",
       para: "Tomate de la région du Belier, produit dans les meilleures conditions",
