@@ -466,11 +466,7 @@
     /***/
     function _(module, exports, __webpack_require__) {
       __webpack_require__(
-<<<<<<< HEAD
-      /*! /Users/osx/Documents/projets/Lidar/ppai/ograndmarche_app/node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-polyfills.js */
-=======
       /*! /Users/macbookpro/Documents/app/DAR/ograndmarche_app/node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-polyfills.js */
->>>>>>> origin/main
       "mRIq");
 
       __webpack_require__(
@@ -478,11 +474,7 @@
       "R0gw");
 
       module.exports = __webpack_require__(
-<<<<<<< HEAD
-      /*! /Users/osx/Documents/projets/Lidar/ppai/ograndmarche_app/src/polyfills.ts */
-=======
       /*! /Users/macbookpro/Documents/app/DAR/ograndmarche_app/src/polyfills.ts */
->>>>>>> origin/main
       "hN/g");
       /***/
     },

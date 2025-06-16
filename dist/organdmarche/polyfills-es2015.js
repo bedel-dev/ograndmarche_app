@@ -7,11 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-module.exports = __webpack_require__(/*! /Users/osx/Documents/projets/Lidar/ppai/ograndmarche_app/src/polyfills.ts */"hN/g");
-=======
 module.exports = __webpack_require__(/*! /Users/macbookpro/Documents/app/DAR/ograndmarche_app/src/polyfills.ts */"hN/g");
->>>>>>> origin/main
 
 
 /***/ }),
